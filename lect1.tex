@@ -1,0 +1,76 @@
+\section{Introduction. Summary of course through an example. Branching process}
+We have an individual that gives a birth to a random number of offsprings -- random variable $X$.
+$X$ define a distribution, i.e., $P: \mathbb{Z}^+ \to [0,1]$, i.e., $P(X=k) \in [0,1]$, and $\sum_{k=0}^\infty P(X=k)  = 1$.
+
+\paragraph{Definition} $f_X(\theta) = \sum_{k=0}^\infty \theta^k P(X=k)$ -- moment-generating function. The series is absolutely convergent for $\theta\in [-1,1]$ since $k$ sums to $1$. For $\theta \in (-1,1)$, $f_x$ is analytic, thus we can differentiate it term-by-term:
+$$f'_X(\theta) = \sum_{k\geq1} \theta^{k-1} P(X=k)$$
+Since, $f_X$ is analytic, knowing it means knowing $P(X=k)$ and vice versa.
+
+Note that $f_X(0) = P(X=0)$ and $f_X(1)=1$. Also
+$$f'_X(1) = \sum_{k\geq 0 }^\infty k P(X=k) = \mathbb{E} X = \mu$$
+$$\lim_{\theta \to 1} \frac{f_X(1)-f_X(\theta)}{1-\theta}=\lim_{\theta \to 1} \frac{1-f_X(\theta)}{1-\theta}$$
+
+Note also that $f_X$ is convex, since second derivative is positive.
+\paragraph{Size of $n^{th}$ generation}
+Let $\qty(X_r^(n))_{n,r=1^\infty}$, where $n$ is generation and $r$ is offspring number (index) in $n^{th}$ generation.
+
+Assume $X_r^{(n)}$ are i.i.d.  (independent, identically distributed) random variables.
+
+Identically distributed means $$P(X_n^r = k) = P(X=k)$$.
+
+Independence means $$P\qty(\forall i<J \: X_{r_i}^{n_i} =k) = \prod_{i=1}^J P\qty( X_{r_i}^{n_i} =k)$$.
+
+Define $z_1=X_1^1$. $z_2 = \sum_{r=1}^{z_1} X_r^2$ an so on:
+$$z_{n+1} = \sum_{r=1}^{z_n} X_{r}^{n}$$
+
+We want to study asymptotics of $z_n$.
+
+Given $U$ and $V$ taking values in $ \mathbb{Z}^+$,
+$$\mathbb{E}] \qty[ U|V=k] = \sum_{j=0}^\infty j P(U=j | V=k)$$, where $$P(U=j|V=k) = \frac{P(U=j, V=k)}{P(V=k)}$$
+
+\paragraph{} If $U$, $V$ are independent, $P(U=j|V=k) = P(U=j)$ and thus $\mathbb{E}\qty[ U|V=k] = \mathbb{E} U$.
+\paragraph{Definition}
+Define random variable $\mathbb{E}\qty[U|V]$ such that
+$$\mathbb{E}\qty[U|V] = \mathbb{E}\qty[U|V=k] $$
+if $V=k$.
+\paragraph{Tower property}
+$$\mathbb{E} \qty\big[\mathbb{E}\qty[U|V]] = \mathbb{E}U$$
+
+Define $$f_{n} = \sum_{k=0}^\infty \sum_{k=0}^\infty \theta^{k} P(z_n=k) = \mathbb{E} \theta^{z_n}$$. 
+
+\paragraph{Theorem} 
+$$f_{n+1} (\theta) = f_n (f_X(\theta))$$
+or
+$$f_{n} (\theta) = \underbrace{f\circ f\circ \dots \circ f}_{n \text{ times}}(\theta))$$
+\subparagraph{Proof}
+Use tower property with $U^{z_{n+1}} $ and $V=\theta^{z_n}$.
+By tower property
+$$\mathbb{E} \qty[\theta^{z_{n+1}}] = \mathbb{E} \qty\big[\mathbb{E} \qty[\theta^{z_{n+1}}| \theta^{z_{n}}]]$$
+$$ \mathbb{E} \qty\big[\mathbb{E} \qty[\theta^{z_{n+1}}| \theta^{z_{n}}]] = \sum_{k=0}^\infty P(z_n=k) \mathbb{E} \qty[\theta^{z_{n+1}}| \theta^{z_{n}}=k]$$
+What is $\mathbb{E} \qty[\theta^{z_{n+1}}| \theta^{z_{n}}=k]$?
+$$\mathbb{E} \qty[\theta^{z_{n+1}}| \theta^{z_{n}}=k] =\mathbb{E} \qty[\theta^{\sum_{j=1}^{k} X_j^{n+1}}| \theta^{z_{n}}=k] \stackrel{\text{independence}}{=}\mathbb{E} \qty[\theta^{\sum_{j=1}^{z_n} X_j^{n+1}}]\stackrel{\text{independence}}{=} \prod_{j=1}^k \mathbb{E} \qty[\theta^{ X_j^{n+1}}] \stackrel{\text{i.d.}}{=} (f_X(\theta))^k $$
+Thus
+$$ \mathbb{E} \qty\big[\mathbb{E} \qty[\theta^{z_{n+1}}| \theta^{z_{n}}]] = \sum_{k=0}^\infty P(z_n=k) (f_X(\theta))^k = f_n(f(\theta))$$
+
+Also we can say
+$$\mathbb{E} \qty[\theta^{z_{n+1}}|z_n] = \qty(f_X(\theta))^{z_n}$$
+
+\paragraph{Study of $z_n$}
+What is $\pi_n= P(z_n=0) = f_n(0) = f(\pi_{n-1})$, probability that population is extinguished. Since $z_{n-1} =0 \Rightarrow z_n=0$, i.e. $\pi_n$ is non-decreasing.
+
+Let $P\qty(z_n=0 \text{ for some n}) = \pi$.
+
+We hope that $\left\{ z_n=0 \right\}$ such that
+$$\bigcup_n \left\{ z_n=0 \right\} = \left\{ z_n=0 \text{ for some n}\right\}$$
+i.e., $\pi = \lim_{n\to \infty} \pi_n$. We call $\pi$ the extinction probability.
+
+\paragraph{Theorem} If $\mu=\mathbb{E} > 1$ then $\pi$ is a unique root of $\pi=f(\pi)$ and $\pi \in [0,1)$. If $\mu\leq 1$, $\pi=1$.
+
+If we look at $f(\pi)$ and $\pi$, they intersect in $1$, and they can intersect in two points since $f(x)$ is convex. There is second intersection iff $f'(1) = \mu > 1$.
+
+\paragraph{Construction of $X_n^r$}
+Construct set $\Omega$, $f_{n,r}: \Omega \to \mathbb{Z}^+$ and $\mathcal{F}$ a collection of subsets of $\Omega$ with $P: \mathcal{F} \to [0,1]$.
+
+Let $\Omega = \mathbb{Z}^+ \times \mathbb{Z}^+$, $\mathcal{F} = \left\{ 0,1 \right\}^\Omega$. 
+
+The problem is when we have infinitely number of variables.
