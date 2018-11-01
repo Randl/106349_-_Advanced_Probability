@@ -17,6 +17,7 @@
 \usepackage{dsfont} %mathbb 1
 \usepackage{esint} % beatiful integrals
 \usepackage[arrowdel]{physics}
+\usepackage{amsthm} % theorems
 
 \usepackage[T1]{fontenc}
 % Nicer default font (+ math font) than Computer Modern for most use cases
@@ -53,6 +54,34 @@
 \paragraphfont{\color{parfont}}
 \subparagraphfont{\color{subparfont}}
 
+
+% declare a new theorem style
+\newtheoremstyle{bluestyle}%
+{3pt}% Space above
+{3pt}% Space below 
+{}% Body font
+{}% Indent amount
+{\bfseries\color{blue}}% Theorem head font
+{.}% Punctuation after theorem head
+{.5em}% Space after theorem head
+{}% Theorem head spec (can be left empty, meaning ‘normal’)
+% declare a new theorem style
+\newtheoremstyle{redstyle}{3pt}{3pt}{}{}{\bfseries\color{red}}{.}{.5em}{}
+\newtheoremstyle{olivestyle}{3pt}{3pt}{}{}{\bfseries\color{olive}}{.}{.5em}{}
+\newtheoremstyle{orangestyle}{3pt}{3pt}{}{}{\bfseries\color{orange}}{.}{.5em}{}
+\newtheoremstyle{magentastyle}{3pt}{3pt}{}{}{\bfseries\color{magenta}}{.}{.5em}{}
+
+\theoremstyle{bluestyle}
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{redstyle}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{magentastyle}
+\newtheorem{coll}{Collary}[section]
+\theoremstyle{olivestyle}
+\newtheorem{lemma}{Lemma}[section]
+\theoremstyle{olivestyle}
+\newtheorem{prop}[theorem]{Proposition}
+
 %\usepackage{babel}[english]
 %opening
 \title{106349 - Advanced probability}
@@ -62,6 +91,7 @@
 % https://sites.google.com/site/njcrawfordacademic/
 % David Williams Probability with Martingales
 % Rick Derret Probability Theory and examples
+
 
 \parindent=0em
 \begin{document}
@@ -75,4 +105,5 @@
 
 %\tableofcontents
 \input{lect1.tex}
+\input{lect2.tex}
 \end{document}

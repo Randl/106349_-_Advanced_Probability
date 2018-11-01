@@ -1,0 +1,51 @@
+
+
+
+\paragraph{Example}
+Example of not well-behaved triple $(\Omega, \mathcal{F}, P)$. $\Omega =\mathbb{N}$. Now $\mathcal{F} = \left\{  C\subset \mathbb{N} : C \text{ has density} \right\}$.
+
+$C$ has density means 
+$$\frac{\abs{C \cap \mathbb{N}}}{n} \stackrel{n\to \infty}{\to} \rho(C)$$
+
+However, for $C(m) = \left\{  1,2,\dots, m \right\}$, $\forall m \quad \rho(c_m)$, and 
+$$\rho\qty(\bigcup C_m ) = 1$$
+
+Thus $(\mathbb{N}, \mathcal{F}, \rho)$ is not a good probability space, since it doesn't fulfills this
+$\pi_n\to \pi$ property. Note we can define other probabilities on naturals, for example
+$$P\qty(\left\{ i \right\}) = 2^{-i}$$
+
+
+\paragraph{Asymptotics of $z_i$ }
+Assuming $\pi \in (0,1)$, what is behavior of $z_n$?
+\begin{definition}
+	$z_n$ is a Markov chain if 
+	$$P(z_{n+1}=j|z_i=k_i \quad \forall i\leq n) = P(z_{n+1} = j | z_n=k_n)$$
+	We can use to compute expectation:
+	$$\mathbb{E}[z_{n+1}|z_i=k_i \quad \forall i<n] = E\qty[z_{n+1}|z_n=k_n]$$
+\end{definition}
+
+Then, since $E\qty[\sum_{i=1}^J X_i^n] = J\mu$
+$$E\qty[z_{n+1}|z_n] = \mu z_n$$
+
+Let $M_n = \frac{z_n}{\mu^n}$ then $\mathbb{E}[M_n] = 1$. Also
+$$\mathbb{E}[M_{n+1}|z_0,\dots, z_n] = M_n$$
+This is a definition of martingale with respect to $z_0, \dots, z_n$.
+
+Let $\qty(\Omega, \mathcal{F}, P)$ we say $S$ happens almost surely (a.s.) if $$P\qty(\left\{ w\in \Omega : S \text{ is true for w} \right\}) = 1$$
+\begin{theorem}[Martingale convergence theorem]
+	If $M_n$ is a positive martingale then $\lim_{n\to \infty} M_N=M_\infty$ exists a.s. and 
+	\begin{itemize}
+		\item $\mu \leq 1$. $M_\infty =0 $ a.s. That means $\mathbb{E}M_\infty = 0$ but $\mathbb{E} M_ = 1$, i.e., 
+		$$\mathbb{E}\qty[\liminf_{n\to \infty} M_n] < [\liminf_{n\to \infty} \mathbb{E}\qty[M_n]$$ 
+		\item $\mu>1$. If $M_\infty > 0$ with positive probability then $z_n \sim \mu^n M_\infty$.  
+	\end{itemize}
+\end{theorem}
+
+
+\begin{lemma}[Fatov's lemma]
+	$$\mathbb{E}\qty[\liminf_{n\to \infty} M_n] \leq [\liminf_{n\to \infty} \mathbb{E}\qty[M_n]$$ 
+\end{lemma}
+
+\begin{theorem}
+	$$\mathbb{E} \qty[M_\infty] = 1 \iff \mu>1 \quad \text{ and } \mathbb{E}\qty[X \log(X)] < \infty$$
+\end{theorem}
