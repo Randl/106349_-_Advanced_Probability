@@ -1,0 +1,90 @@
+
+
+\begin{definition}
+	Let $\qty(S,\mathcal{F})$, $\qty(\Omega, \mathcal{B})$ be measurable spaces.
+	$$\phi: S \to \Omega$$
+	
+	$\phi$ is $\qty\big((\mathcal{F}, \mathcal{B}))$-measurable if 
+	$\forall B\in \mathcal{B} \quad \phi^{-1}(B) \in \mathcal{F} $.
+\end{definition}
+
+\paragraph{Remark}
+$\mathcal{C}$ is collection of sets in $\Omega$. $\phi^{-1}(\mathcal{C}) = \left\{ \phi^{-1}(C) : C \in \mathcal{C} \right\}$.
+\begin{itemize}
+	\item $$\phi^{-1}\qty(\bigcap_{i\in I} B_i) =\bigcap \phi^{-1} (B_i)$$
+	\item $$\phi^{-1}\qty(\bigcup_{i\in I} B_i) =\bigcup \phi^{-1} (B_i)$$
+	\item $$\phi^{-1}\qty(B^C) =\qty[\phi^{-1} (B)]^c$$
+\end{itemize}
+
+\begin{lemma}
+	Let $\sigma(\mathcal{C}) = \mathcal{B}$. $\phi$ is measurable iff $\phi^{-1}(\mathcal{C}) \subseteq \mathcal{F}$.
+	
+	\begin{coll}
+		$\Omega = \mathbb{R}$, $\mathcal{B}(\mathbb{R})$ then $\phi$ is measurable iff
+		$$\forall x \: \phi^{-1}((-\infty, x]) \subseteq \mathcal{F}$$
+	\end{coll}
+\end{lemma}
+\begin{lemma}
+	Let $\qty(S,\mathcal{F})$, $\qty(T, \mathcal{T})$, $\qty(\Omega, \mathcal{B})$ be measurable spaces. Let $\phi_1: S \to T$ and $\phi_2 T \to \Omega$ measurable. Then $\phi_2 \circ \phi_1$ is measurable.
+	\begin{proof}
+		Let $B\in \mathcal{B}$. Then $\phi_2^{-1}(B) \in \mathcal{T}$, and thus $\phi_1^{-1}\qty(\phi_2^{-1}(B)) \in \mathcal{F}$, meaning $\qty(\phi_2 \circ \phi_1)^{-1}\qty(B) \in \mathcal{F}$.
+	\end{proof}
+\end{lemma}
+\begin{lemma}
+	$\Omega = \mathbb{R}$. Then $\left\{ \phi| \phi \text{ is } \mathcal{F}, \mathcal{B} \text{-measurable} \right\}$ is an algebra over $\mathbb{R}$.
+	\begin{proof}
+		Using previous lemma and the fact $+$ is continuous, and thus measurable, we define $\Psi(s) = \qty(\phi_1(s), \phi_2(s))$.
+		
+		$\Psi$ is measurable. Take a look at
+		$$\Psi^{-1}\big((-\infty, x_1] \cross (-\infty, x_2] \big) = \left\{  s: \phi_1(s) \in (-\infty, x_1] ,\: \phi_2(s) \in (-\infty, x_2]  \right\}$$
+		
+	\end{proof}
+\end{lemma}
+
+\paragraph{Notation} 
+$$\phi: (S,\mathcal{F}) \to (\Omega, \mathcal{B})$$
+We write $\phi\in \mathcal{F}$ for $\phi$ is $\mathcal{F},\mathcal{B}$ measurable.
+\paragraph{Constructions preserved by measurability}
+\begin{prop}
+	If $\left\{ \phi_n \right\}_{n=1}^\infty$ measurable maps $(S,\mathcal{F}) \to (\Omega, \mathcal{B})$, then $\liminf \phi_n$, $\limsup \phi_n$, $\inf \phi_n$, $\sup_n$ are also measurable.
+	\begin{proof}
+		For example, fpr infimum, we need to show that
+		$$\left\{s|\: \inf\limits_n \phi_n(s) \leq c  \right\} \in \mathcal{F}$$
+		or alternatively,
+		$$\left\{s|\: \inf\limits_n \phi_n(s) > c  \right\} \in \mathcal{F}$$
+		which is just countable intersection:
+		$$\bigcap_n \left\{ s: \phi_n(s) > c \right\}$$
+		
+		Same for $\limsup$, which is just infimum of supremum:
+		$$\limsup \phi_n = \inf\limits_m \qty(\sup\limits_{n\geq m} \phi_n)$$
+	\end{proof}
+\end{prop}
+
+\paragraph{Recall}
+$$S_n = \text{number of 1's until n}$$
+We can view $s_n$ as a composition of projection and sum:
+$$\omega \mapsto \qty\big(\pi_1(\omega),\dots \pi_n(\omega)) \mapsto \sum_{i=1}^n \pi_i(\omega)$$
+Both are continuous (projection from the definition of product topology) and thus measurable, and so is $\frac{S_n}{n}$.
+\section{Random variables}
+\begin{definition}
+	Let $\qty(\Omega, \mathcal{F}, P)$ be a probability space. 
+	$X: \Omega \to (S, \mathcal{S}) $ measurable is called a random variable. 
+\end{definition}
+
+\paragraph{Basic constructions with random variables}
+\begin{definition}
+	Given a probability space $\qty(\Omega, \mathcal{F}, P)$  and measurable $ (S, \mathcal{S})$, $X$ induces measure $\mathcal{L}_X$ on $ (S, \mathcal{S})$ via
+	$$\mathcal{L}_X(E) = P(X \in E)$$
+
+$\mathcal{L}_X$ is called marginal distribution of $X$ or law of $X$.
+\end{definition}
+\begin{prop}
+	$\mathcal{L}_X$ is countably additive set function.
+\end{prop}
+
+If $ (S, \mathcal{S})$ is $\mathbb{R}, \mathcal{B}$. By uniqueness theorem, $\mathcal{L}_X$ if defined by
+$$F_X(x) = \mathcal{L}_X\big((-\infty, x]\big) = P\big(X\in (-\infty, x]\big)$$ 
+
+$\mathcal{L}_X \mapsto F_X$ is 1-1 (onto). $F_X$ is cumulative distribution function (CDF) or distribution function of $X$.
+
+We ask the question: what are set properties distinguish $F_X$? 
