@@ -28,7 +28,7 @@
 	It is easy to construct one
 	$$I = \left\{ \mathcal{F} :\mathcal{F} \supset C \right\}$$
 	and then
-	$$\sigma(C) = bigcap_{\mathcal{F}\in I} \mathcal{F}$$
+	$$\sigma(C) = \bigcap_{\mathcal{F}\in I} \mathcal{F}$$
 \end{definition}
 
 \begin{definition}
@@ -104,7 +104,7 @@ Check that $\mu_0$ is well defined and $\sigma$-additive.
 	$$\mu(A\cup B) \leq \mu(A) + \mu(B) $$
 	$$\mu\qty(\bigcup_{i=1}^\infty F_i) \leq \sum_{i=1}^\infty \mu(F_i) $$
 	
-	If $mu(S) < \infty$
+	If $\mu(S) < \infty$
 	$$\mu(A\cup B) = \mu(A) + \mu(B) - \mu(A\cap B)$$
 	
 	From that we get inclusion-exclusion:
@@ -132,6 +132,8 @@ Proof the lemma
 	
 	Since measure is finite, the tail of series tends to $0$, thus 
 	$$\mu(F_\infty) - \mu(F_n) = \sum_{k=n}^\infty G_k \to 0$$
+	
+	Then we can take complements and get the second statement.
 \end{proof}
 
 \paragraph{Exercise}
