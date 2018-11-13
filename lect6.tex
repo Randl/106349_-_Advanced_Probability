@@ -1,0 +1,37 @@
+\begin{prop}[Properties of CDF]
+\begin{enumerate}
+	\item $F_X$ is non-decreasing
+	\item $F_X$ is right continuous
+	\item $F_X(-\infty) = 0$ 
+\end{enumerate}
+\begin{proof}
+	
+	\begin{enumerate}
+		\item If $x<y$, $(-\infty, x] \subseteq (-\infty, y]$, thus, from monotonicity of measure $F_X(x)\leq F_X(y)$  
+		\item we want to show
+		$$\lim_{x\downarrow x_0} F(x) = F(x_0)$$
+		
+		Since if $E_n \downarrow E$, then $\mu(E_n) \to \mu(E)$
+		
+		We can look on sequence $\left\{ x_n\right\}$:
+		$$\omega \in \bigcap_n \left\{ X \in (-\infty, x_n) \right\} \Rightarrow \forall n \quad X(\omega) \leq x_n \Rightarrow X(\omega) \leq x \Rightarrow \bigcap_n \left\{ X \in (-\infty, x_n) \right\} \subseteq \left\{ X \in (-\infty, x) \right\}$$
+		The other direction is obvious.
+		\item Since 
+		$$\bigcap_x X^{-1}\big((-\infty,x]\big) = \emptyset$$
+	\end{enumerate}
+\end{proof}
+\end{prop}
+
+\subsection{Independence}
+$(\Omega, \mathcal{F}, P)$ probability space.
+Let $\left\{ \mathcal{J}_i \right\}_{i\in I}$ be a collection of sub-$\sigma$-algebras of $\mathcal{F}$.
+\begin{definition}[Independence of $\sigma$-algebras]
+	Say $\left\{ \mathcal{J}_i \right\}_{i\in I}$ are independent if
+	$$\forall i_1, \dots i_k \: \forall j \quad G_{ij} \in  \mathcal{J}_i \quad P\qty(\bigcap_{j=1}^k G_{ij}) = \prod_{j=1}^k P(G_{ij})$$
+\end{definition}
+\begin{definition}[Independence of random variables]
+	Say $\left\{ X_i \right\}_{i\in I}$ are independent if $\sigma(X_i)$ are independent.
+\end{definition}
+\begin{definition}[Independence of sets]
+Say $\left\{ E_i \right\}_{i\in I}$ are independent if random variables $\mathds{1}_{E_i}$ are independent.
+\end{definition}

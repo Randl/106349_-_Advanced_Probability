@@ -71,6 +71,10 @@ Both are continuous (projection from the definition of product topology) and thu
 	$X: \Omega \to (S, \mathcal{S}) $ measurable is called a random variable. 
 \end{definition}
 
+\paragraph{Notation}
+$$\left\{ \omega: X(\omega) \in A \right\} = X^{-1}(A)$$
+We use notation like $X\in A$.
+
 \paragraph{Basic constructions with random variables}
 \begin{definition}
 	Given a probability space $\qty(\Omega, \mathcal{F}, P)$  and measurable $ (S, \mathcal{S})$, $X$ induces measure $\mathcal{L}_X$ on $ (S, \mathcal{S})$ via
@@ -85,6 +89,44 @@ $\mathcal{L}_X$ is called marginal distribution of $X$ or law of $X$.
 If $ (S, \mathcal{S})$ is $\mathbb{R}, \mathcal{B}$. By uniqueness theorem, $\mathcal{L}_X$ if defined by
 $$F_X(x) = \mathcal{L}_X\big((-\infty, x]\big) = P\big(X\in (-\infty, x]\big)$$ 
 
-$\mathcal{L}_X \mapsto F_X$ is 1-1 (onto). $F_X$ is cumulative distribution function (CDF) or distribution function of $X$.
+\begin{prop}
+	$\mathcal{L}_X \mapsto F_X$ is 1-1 and onto.
+	\begin{proof}
+		Uniqueness:
+		
+		If $\mu$, $\nu$ exists such that $$\mu\big((-\infty, x]\big) = F_X(x) = \nu\big((-\infty, x]\big)$$
+		then, since they agree on $\pi$-system, and thus are equal by uniqueness theorem.
+		
+		Existence
+		$\mu\big((-\infty, x]\big)$ fulfills Carath\'{e}odory's extension theorem requirements, thus there exists unique extension.
+	\end{proof}
+\end{prop}
+
+We assume there exists Lebesgue measure on Borel sets $\qty([0,1], \mathcal{B}, \lambda)$.
+
+\begin{definition}
+	A coupling of $X$,$Y$ is $(\Omega, \mathcal{F}, P)$  and $\tilde{X},\tilde{Y} : \Omega \to \mathbb{R}$  such that $\mu_{\tilde{X}} = \mu_X$ and $\mu_{\tilde{Y}}  = \mu_Y$.
+\end{definition}
+\begin{theorem}[Skorokhod's representation (of a random variable $X$)]
+	Given $\mu_X$, $\mu_Y$ can we construct $(\Omega, \mathcal{F}, P)$ and $\tilde{X},\tilde{Y} : \Omega \to \mathbb{R}$  such that $\mu_{\tilde{X}} = \mu_X$ and $\mu_{\tilde{Y}}  = \mu_Y$, i.e., a coupling of $X$,$Y$.
+	\begin{proof}
+		Given increasing, right continuous $F$ such that $F(-\infty)=0$ and $F(\infty) = 1$. We want to define $X: [0,1] \to \mathbb{R}$ s.t. $F_X=F$. 
+		$$X^-(\omega) = \inf \left\{ x: F(x) \geq \omega \right\}$$
+		(We could also choose $X^+(\omega) = \inf \left\{ x: F(x) \geq \omega \right\}$, which is a bit different)
+		
+		We want to show that
+		$$\left\{ \omega : X^-(\omega) \leq x \right\} = \left\{ \omega \leq F(x) \right\}$$
+		
+		$X^-(\omega) \leq x $ means that $F(x) \geq \omega$ (by definition), verifying $\left\{ \omega : X^-(\omega) \leq x \right\} \subseteq \left\{ \omega \leq F(x) \right\}$
+		
+		$F(x) \geq \omega $ means $X^-(\omega)  \leq x$ (since $F$ is increasing), finishing the proof.
+		
+		Note, that $X^+$ and $X^-$ disagree only on countable number of points.
+		
+	\end{proof}
+\end{theorem}
+ 
+
+$F_X$ is cumulative distribution function (CDF) or distribution function of $X$.
 
 We ask the question: what are set properties distinguish $F_X$? 
