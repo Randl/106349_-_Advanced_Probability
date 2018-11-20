@@ -1,0 +1,77 @@
+\begin{lemma}[Checking independence]
+	Let $\mathcal{F}_1$, $\mathcal{F}_2$ be $\sigma$-algebras, $\mathcal{A}_1$, $\mathcal{A}_2$ $\pi$-systems such that $\sigma(\mathcal{A_1})=\mathcal{F}_i$.
+	
+	Then $\mathcal{F}_1$, $\mathcal{F}_2$ are independent iff 
+	$$\forall A_1\in \mathcal{A}_1, \: A_2\in \mathcal{A}_2 \quad P(A_1\cap A_2) P(A_1)P(A_2)$$ 
+	\begin{proof}
+		Given $E \in \mathcal{F}$ let $P_E(A) = P(A\cap E)$, a measure on $(\Omega, \mathcal{F})$.
+		
+		Given $A_1\in \mathcal{A}_1$ consider $\eval{P_{A_1}}_{\mathcal{F}_2}$.
+			
+		$$\forall \: A_2\in \mathcal{A}_2 \: P_{A_1}(A_2) = P(A_1)P(A_2)$$
+		
+		Thus $P_{A_1}$ and $P(A_2)\times P$ are measures on $\mathcal{F}_2$ agreeing on $\mathcal{A}_2$.
+		
+		$$\forall A_1 \in \mathcal{A}_1 , E_2\in \mathcal{F}_2  \quad P(A_1\cap E_2) = P(A_1)P(E_2)$$
+		
+		Next iterate argument argument for  $\mathcal{F}_1 $
+		$$\forall \: E_2\in \mathcal{F}_2 \: P_{E_2}= P(E_2)P$$
+		
+		By uniqueness 
+		$$\forall E_i \in \mathcal{F}_i \quad P(E_1\cap E_2) = P(E_1)P(E_2)$$  
+	\end{proof}
+
+\begin{coll}
+	To check $X_1,\dots, X_k$ are independent random variables it suffices 
+	$$\forall x\in \mathbb{R}^k  \quad P(X_i\leq x_i) = \prod_{i=1}^k P(X_1\leq x_i)$$ 
+\end{coll}
+\end{lemma}
+
+\begin{lemma}[Second Borel-Cantelli lemma]
+	 \label{bc2}
+	 If $\sum_i P(E_i) =\infty$ and $\left\{ E_i \right\}_{i=1}^\infty $ are independent, then 
+	 
+	 $$P(E_n \text{ i.o.}) =0$$
+	 \begin{proof}
+	 	$$\left\{ E_i  \text{ i.o.} \right\}^C =\left\{ E_i^C  \text{ eventually} \right\} $$
+	 	It's enough to show
+	 	$$P\qty(\bigcap_{i\geq n} E_i^C) = 0 $$
+	 	or, by truncating
+	 	$$P\qty(\bigcap_{i\geq n}^k E_i^C) = 0 $$
+	 	
+	 	By independence
+	 	$$P\qty(\bigcap_{i\geq n} E_i^C) \prod_{i=n}^k P(E_i^C) = \prod_{i=n}^k \qty[1-P(E_i)] \leq e^{-\sum_{i=n}^k P(E_i)}$$
+	 	
+	 	Since the sum tends to infinity, the exponent tends to $0$.
+	 \end{proof}
+\end{lemma}
+
+\paragraph{Example}
+Let $\left\{ X_i \right\}_{i=1}^\infty$ be i.i.d. $Exp(1)$ random variables, i.e. 
+$$P(X_i>x) = e^{-x}$$
+
+We are interested in growth rate of $X_n \leq f(n)$.
+
+If $f(n) = \alpha \log(n)$
+$$P(X_n > f(n)) = e^{-f(n)} = n^{-\alpha}$$
+Thus, from Lemmas \ref{bc1}, \ref{bc2}
+$$P(X_n \geq \alpha \log(n) \text{ i.o.}) = \begin{cases}
+0 & \alpha > 1\\
+1 & \alpha \leq 1
+\end{cases}$$
+Define $L = \limsup_{n\to \infty} \frac{X_n}{\log(n)} $, then
+$$P(L\geq 1) = P(X_n \geq \log(n) \text{ i.o.}) = 1$$
+
+Finally, if we look at $E = \bigcup_{k=1}^\infty \left\{ L \geq 1+ \frac{1}{k} \right\}$,
+$$P(E)  \leq \sum_{k=1}^\infty P\qty( L \geq 1+ \frac{1}{k}) \leq \sum_{k=1}^\infty P\qty( X_n \geq \qty(1+ \frac{1}{2k})\log(n)) = 0 $$
+thus $P(L\leq 1)=1$.
+
+\paragraph{Method of generation of i.i.d. uniform $[a,b]$ variables}
+
+We write $\omega = \sum_{i=1}^\infty \frac{\omega_i}{2^i}$
+$$\begin{cases}
+w^{(1)} = \omega_1\omega_3\omega_6\omega_{10}\omega_{15}\dots\\
+w^{(2)} = \omega_2\omega_5\omega_{9}\omega_{14}\dots\\
+w^{(3)} = \omega_4\omega_8\omega_{13}\omega_{19}\dots\\
+\vdots
+\end{cases}$$
