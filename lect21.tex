@@ -1,0 +1,113 @@
+
+
+Let $M_n$ be a martingale with respect to $\mathcal{F}_n$, $X_n=M_n-_{n+1}$ and $q_n =\mathbb{E}\qty[X^2 | \mathcal{F}_{n-1}]$.
+\begin{lemma}
+	$$\forall r<s\leq t< u \quad \mathbb{E} \qty[(M_u-M_t)(M_s-M_r)] = 0$$
+	$$\mathbb{E}\qty[(M_u-M_t)^2] = \sum_{k=t+1}^u \mathbb{E}[X^2_k]$$
+	\begin{proof}
+		$$\mathbb{E} \qty[M_u-M_t|\mathcal{F}_t] = 0$$
+		$$\mathbb{E} \qty[(M_u-M_t)(M_s-M_r)|\mathcal{F}_t] = (M_s-M_r)\mathbb{E} \qty[(M_u-M_t)|\mathcal{F}_t]$$
+		and
+		$$(M_u-M_t)^2 = \qty(\sum_{k=t+1}^u X_k)^2 = \sum_{k,l=t+1}^u X_kX_l$$
+	\end{proof}
+\end{lemma}
+
+\begin{prop}
+	Let $N_t = M_t^2 - \sum_{i\leq t} q_i$ then $N_t$ is a martingale.
+\begin{proof}
+	$$N_{t+1} -N_t = M_{t+1}^2-M_{t}^2 - q_{t+1}$$
+	$$\expval{N_{t+1}-N_t|\mathcal{F}_t} = \expval{M_{t+1}^2-M_t^2|\mathcal{F}_t} =  - q_{t+1} $$
+	But
+	$$M_{t+1}^2 = M_t^2 +(M_{t+1}-M_t)^2+2M_t(M_{t+1}-M_t)$$
+\end{proof}
+\end{prop}
+
+\begin{coll}
+	$$\sup\limits_n \mathbb{E} [M^2_n] < \infty \iff \sum_k \mathbb{E} \qty[\qty(M_{t+1} - M_t)^2] <\infty$$
+	\begin{proof}
+		$$\mathbb{E} (M_{n+k}-M_n)^2 = \sum_{j=n}^{n+k} \mathbb{E} [\qty(M_{j+1}-M_j)^2] \leq \sum_{j=n}^{\infty} \mathbb{E} [\qty(M_{j+1}-M_j)^2]$$
+		By Fatou
+		$$\mathbb{E} (M_{\infty} - M_n)^2 \leq \sum_{j=n}^\infty \mathbb{E} [\qty(M_{j+1}-M_j)^2]$$
+		
+		Moreover by the equality at start of the proof we get
+		$$\mathbb{E} (M_\infty - M_n)^2 = \sum_{j=n}^\infty \mathbb{E} [\qty(M_{j+1}-M_j)^2] $$
+		Also if $M-0=0$
+		
+		$$\mathbb{E} M_\infty^2 = \sum_{j=n}^\infty \mathbb{E} [X)^2] $$
+	\end{proof}
+\end{coll}
+
+\begin{theorem}
+	Let $X_k$ be independent random variable such that $\mathbb{E} [X_k] = 0$ and $\sigma^2_k < \infty$. Let $M_n = \sum X_k$
+	\begin{enumerate}
+		\item If $\sum \sigma_k^2 <\infty $, $M_n\to M_\infty$ a.s. and $L^2$.
+		\item If $\abs{X_i} \leq K < \infty $, then $\sum X_i $ converges a.s.
+	\end{enumerate} 
+
+\begin{proof}
+	Since $\mathbb{E} [X_i] = 0$
+	$$\mathbb{E} [M_n|\mathcal{F}_{n-1}] = M_{n-1} + \mathbb{E}[X_n | \mathcal{F}_{n-1}]$$
+	By independence, $M_n$ is $\mathcal{F}_n$ martingale.
+	
+	
+	Recall $N_t$ and note $q_{k+1} = \mathbb{E} [X_{k+1}] <\infty$.
+	
+	Define
+	$T_c = \inf \left\{  i: \abs{M_i} \geq c \right\}$
+	$$0=\mathbb{E} \qty[N_{\min \left\{ T_c, n \right\}}] = \mathbb{E} [M^2_{\min \left\{ T_c, n \right\}}] - \mathbb{E} \qty[\sum_{k=1}^{\min \left\{ T_c, n \right\}} \sigma_k^2] $$
+	Thus
+	$$\mathbb{E} \qty[\sum_{k=1}^{\min \left\{ T_c, n \right\}} \sigma_k^2] = \mathbb{E} [M^2_{\min \left\{ T_c, n \right\}}] \leq (c+k)^2 $$
+	By Fatou
+	$$\mathbb{E} \qty[\sum_{k=1}^{T_c} \sigma_k^2]\leq (c+k)^2 $$
+	If $\exists c<\infty$ such that $P(T_c=\infty) = 0$ we are done.
+	
+	By assumption of a.s. convergence, $M_i \to  M_\infty $ thus $\exists c $ such that $P(\abs{M_i} <c) > 0$.
+\end{proof}
+
+\end{theorem}
+
+
+\begin{lemma}
+	If $\abs{X_i} \leq K$, $\sum X_i $ converges, then $\sum \mathbb{E} [X_i]$ converges and $\sum \sigma_i^2<\infty$
+	\begin{proof}
+		Let $X^*_i=X_i$, then both series converges, and we define $Y_i = X_i - X_i^*$ for which $\mathbb{E} [Y_i] = 0$.
+		
+		Thus, $\sum \sigma^2(Y_i) <\infty$ and thus $2\sum \sigma^2(X_i) <\infty$. Now from part one, $Z_i = X_i -\mathbb{E} [X_i]$, we get
+		$\sum X_i -\mathbb{E} [X_i] $ converges a.s. and so does $\sum \mathbb{E} [X_i]$
+	\end{proof}
+\end{lemma}
+
+
+
+\begin{lemma}[Cesaro's lemma]
+	Let $b_n$ be strictly increasing and positive and $b_0 = 0$. Let $\left\{ V_n\right\}$ be a convergent sequence $V_n\to V_\infty$. Then
+	$$\frac{1}{b_n} \sum_{k=1}^n (b_k - b_{k-1})V_k \to V_\infty$$
+	\begin{proof}
+		$$1 = \sum_{k=1}^n \frac{b_k-b_{k-1}}{b_n} $$
+		$$V_\infty = \sum_{k=1}^n \frac{b_k-b_{k-1}}{b_n} V_\infty $$
+		$$\abs{V_\infty - \frac{1}{b_n} \sum_{k=1}^n (b_k-b_{k-1}) V_k} \leq \frac{1}{b_n} \sum_{k=1}^n (b_k-b_{k-1}) \abs{V_k-V_\infty}$$
+	\end{proof}
+For $\epsilon>0$ choose $N$ such that $\abs{V_n-V_\infty} < \epsilon$, let $V_k, V_\infty < M$:
+$$\frac{1}{b_n} \sum_{k=1}^n (b_k-b_{k-1}) \abs{V_k-V_\infty} \leq 2M\cdot \frac{b_N}{b_n} + \epsilon \leq 2 \epsilon$$
+\end{lemma}
+
+\begin{lemma}[Kroniker's lemma]
+	Let $\left\{ b_n\right\}$ be a sequence increasing to $\infty$ and $S-n = \sum_{i=1}^n x_i$. Then if
+	$$\sum \frac{x_n}{b_n}$$
+	converges, $\frac{S_n}{b_n} \to 0$.
+	
+	\begin{proof}
+		Let $u_n=\sum_{k=1}^n \frac{x_k}{b_k}$, then $u_n-u_{n-1} = \frac{x_n}{b_n}$ and $u_n \to u_\infty = \sum_{k=1}^\infty \frac{x_k}{b_k}$. Then
+		$x_n = b_n(u_n-u_{n-1})$ and
+		$$S_n = \sum_{k=1}^n x_k = \sum_{k=1}^\infty b_k(u_k-u_{k-1}) = b_nu_n - \sum_{k=1}^n (b_k-b_{k-1} ) u_{k-1}$$
+		$$\frac{S_n}{b_n} = u_n - \sum_{k=1}^n \qty(\frac{b_k-b_{k-1}}{b_n})u_{k-1}$$
+		By Cesaro we get the required.
+	\end{proof}
+\end{lemma}
+\begin{lemma}
+	Let $\mathbb{E}[W_i] = 0$ $\sum_k \frac{\mathbb{E}[W_k^2]}{k^2} <\infty$.
+Then $\frac{\sum_{k=1}^n W_i}{n} \to 0$
+\begin{proof}
+	By Kroniker's lemma it's enough to show that $\frac{W_k}{k}$ converges. By previous discussion of random series this follows from $\sum_i \frac{\mathbb{E} W_k^2}{k^2} < \infty$.
+\end{proof}
+\end{lemma}

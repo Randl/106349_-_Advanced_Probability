@@ -1,0 +1,59 @@
+
+\begin{theorem}[Kolmogorov 3 series theorem]
+	Let $\left\{ X_i \right\}_{i=1}^\infty$ be independent random variables. Then $\sum_{i=1}^\infty X_i$ converges iff exists $K$ such that
+	\begin{enumerate}
+		\item $\sum P(\abs{X_i}\geq K) <\infty$
+		\item $\sum_i \mathbb{E} \qty[X_i^K]$ convergent
+		\item $\sum_i \sigma^2( \qty[X_i^K])$ convergent
+		
+	\end{enumerate}
+
+\begin{proof}
+	If $\sum X_i$ converges, $\lim \abs{X_i} = 0$ a.s., thus $\forall i>I(k)$ sufficiently large $\sum_i X_i^k$ converges a.s. 
+	Since $\sum \sigma^2(X_i^k) <\infty$ by a previous lemma $\sum_i (X_i^k - \mathbb{E} X_i^K)$ converges a.s. But also by second part   $\sum_i \mathbb{E} \qty[X_i^K]$ convergent thus  $\sum_{i=1}^\infty X_i$ converges
+	
+	
+	$$Y_i = X \cdot \mathds{1}_{\abs{X} \leq i}$$
+	$$\mathbb{E}[Y_i] = \mathbb{E}[X\mathds{1}_{\abs{X} \leq i}]$$
+	$$\lim \mathbb{E} [Y_i] = \mathbb{E} [X]$$
+	
+	
+	$$P(X_i\neq Y_i) = P(\abs{X_i}\geq i) = P(\abs{X}\geq i) $$
+	So $$\sum P(X_i \neq Y_i) = \sum_i P(\abs{X} \geq i) \leq \mathbb{E} [X ] < \infty$$
+	
+	$$\frac{\sigma^2(Y_i)}{i^2} = \frac{\sigma^2(Y_i)}{i^2} \leq \frac{\mathbb{E} [X^2 \leq i]}{i^2}$$
+	By MCT
+	$$\sum_i \frac{\sigma^2(Y_i)}{i} = \mathbb{E} \qty[X^2 \sum \frac{\mathds{1}_{\abs{X} \leq i}}{i^2}]$$
+	$$ \sum \frac{\mathds{1}_{\abs{X} \leq i}}{i^2} \leq C \frac{1}{1+\abs{X}}$$
+	So
+	
+	$$\sum_i \frac{\sigma^2(Y_i)}{i} =C \mathbb{E} \qty[ \frac{X^2 }{1+\abs{X}}] < \infty$$
+\end{proof}
+\end{theorem}
+
+
+\begin{theorem}[SLLN]
+	Let $\left\{  X_i\right\}_{i=1}^\infty$ be iid $X\in L^1$. Let $S_n = \sum_{i=1}^n X_i$ then $\frac{S_n}{n} \stackrel{a.s.}{\to} \mu = \mathbb{E}[X]$
+	\begin{proof}
+		Let $Y_i = X \cdot \mathds{1}_{\abs{X} \leq i}$. Then we have $\frac{1}{n} \sum Y_i   \stackrel{a.s.}{\to} \mu$
+	\end{proof}
+\end{theorem}
+
+
+\section{Weak convergence and CLT}
+\paragraph{Modes of convergence}
+\begin{enumerate}
+	\item $X_n\stackrel{a.s.}{\to} X$
+	\item $X_n\stackrel{prob.}{\to} X$
+	\item $X_n\stackrel{dist.}{\to} X$
+\end{enumerate}
+\begin{definition}
+	$\mathcal{S}$ is called Polish space if it is complete, separable metric space.
+\end{definition}
+\begin{definition}
+	Let $\mu_n$ and $\mu$ be measures on $(\mathcal{S}, \mathcal{B})$. We say $\mu_n \stackrel{d}{\to} \mu$ if $\forall f \in C_b(\mathcal{S})$:
+	$$\int\limits_{\mathcal{S}} f(s) \dd{\mu_n(s)} \to \int\limits_{\mathcal{S}} f(s) \dd{\mu(s)}$$
+\end{definition}
+
+\paragraph{Reminder}
+$C_b(\mathcal{S})$ is a Banach space with $\norm{f}_\infty = \sup_{s\in \mathcal{S}}$.

@@ -1,0 +1,85 @@
+\subsection{Markov chains}
+
+Let $\left\{ X_n \right\}$ be a stochastic process taking values in $\qty(E, \mathcal{E})$ and $\left\{ \mathcal{F}_n\right\}$ be a filtration such that $X_n\in \mathcal{F}_n$. 
+\begin{definition}
+	$p: E\times \mathcal{E} \to [0,1]$ is a transition kernel on $E$ if 
+	\begin{enumerate}
+		\item $\forall e\in E$ $P(e,\cdot)$ is a probability measure.
+		\item $\forall A\in \mathcal{E}$ $p(\cdot, A) \in \mathcal{E}$
+	\end{enumerate}
+\end{definition}
+\begin{definition}
+$\left\{ X_n \right\}$ is a Markov chain with respect to $\mathcal{F}_n$ with transition kernel $p$ if 
+$\forall A\in \mathcal{E}$
+$$P(X_{n+1} \in A | \mathcal{F}_n) = p(X_n,A)$$
+
+\end{definition}
+We can acquire $$\mathbb{E}\qty[h(X_{n+1}|\mathcal{F}_n)] = \int\limits_E p(X_n, \dd{e}) h(e)$$
+
+
+Given $(E, \mathcal{E}, p)$ does $\exists X_n$, $\mathcal{F}_n$ Markov with kernel $p$? The answer is yes.
+
+Let $\Omega = E^{\mathbb{N}}$, $\mathcal{F} = E^{\bigotimes \mathbb{E}}$ and $\mathcal{F}_n = \sigma\qty(X_i(\omega) : i\leq n)$. We want
+$X(\omega) = \omega_n$. 
+
+ We want to define law of $\left\{ X_n \right\}$ by first specifying 
+ \begin{align*}
+ P(A_0 \times A_1\times \dots A_n \times E \times E \times \dots) = \mathbb{E} \qty[\prod_{i=0}^n \mathds{1}_{X_i\in A_i}] = \mathbb{E} \qty[\prod_{i=0}^{n-1} \mathds{1}_{X_i\in A_i} \mathbb{E} \qty[\mathds{1}_{X_n\in A_n} | \mathcal{F}_{n-1}]] = \mathbb{E} \qty[\prod_{i=0}^{n-1} \mathds{1}_{X_i\in A_i} p(X_{n-1}, A_n)] =\\= \mathbb{E} \qty[\prod_{i=0}^{n-2} \mathds{1}_{X_i\in A_i} \int\limits_{A_{n-1}} p(X_{n-2}, \dd{e})p(e, A_n)] =\dots = \mathbb{E} \qty[\mathds{1}_{X_0\in A_0} \int\limits_{A_1} \dots \int\limits_{A_n} p(X_0, \dd{e_1})p(e_1, \dd{e_2})\dots p(e_{n-1}, \dd{e_n})]
+ \end{align*}
+
+Let law of $X_0$ be $\mu$ on $E$. Then
+$$P(A_0 \times A_1\times \dots A_n \times E \times E \times \dots) = \int\limits_{A_0} \mu(\dd{e_0}) \int\limits_{A_1}  p(X_0, \dd{e_1})  \int\limits_{A_2}  p(e_1, \dd{e_2}) \dots \int\limits_{A_n}\dots p(e_{n-1}, \dd{e_n}) $$
+
+From now on we'll assume $E$ is either finite or countable. In this case, Markov condition is $\exists p(i,j)$ such that
+$$P(X_{n+1} =j | \mathcal{F}_n) = p(X_n,j)$$
+
+And then
+$$\mathbb{E} [h(X_{n+1})|\mathcal{F}_n] = \sum_{j\in E} P(X_n, j)h(j) = p \vdot j$$
+where $p$ is matrix and $h$ is a vector.
+
+\begin{definition}
+	$h$ is called $p$-superharmonic if $p\vdot h \leq h$ or alternatively, if
+	$Y_n = h(X_n)$ is a p-supermartingale.
+\end{definition}
+\begin{definition}
+	Let $T_i = \inf \left\{ n\geq 1: X_n=i \right\}$.
+\end{definition}
+\begin{definition}
+	We say $X_n$ is irreducible if $P_i(T_j<\infty) > 0$ where $P_i$ is a law of $X_n$ started with $X_0=i$ with probability $i$.
+\end{definition}
+\begin{definition}
+We say $X_n$ is irreducible recurrent if $\forall i,j \in E \quad P_i(T_j<\infty) = 1$.
+\end{definition}
+\begin{theorem}
+	$\left\{X_n\right\}$ is irreducible recurrent on $E$ iff all positive superharmonic are constant.
+	\begin{proof}
+		$\Rightarrow:$
+		Let $\left\{X_n\right\}$ is irreducible recurrent on $E$ and $h$ a positive $p$-superharmonic function. Consider $$\mathbb{E}_i \qty[h\qty(X_n^{T_j})] \leq h(i)$$
+		Thus by Fatou
+		$$\mathbb{E}_i \qty[\liminf h\qty(X_n^{T_j})] \leq h(i)$$
+		and now $h(i) \leq h(j)$. By symmetry, $h(j) = h(i)$.
+	\end{proof}
+\end{theorem}
+
+How to produce $p$-harmonic functions? Let $A\subseteq E$ be some set and $g: A\to \mathbb{R}$ be a bounded function. Assume $\forall i P_i(T_A <\infty) = 1$ and let $h(i) = \mathbb{E}_i \qty[g(X_{T_A})]$.
+
+\begin{lemma}
+	$h$ is $p$-harmonic on $A^c$.
+	\begin{proof}
+		For $i\notin A$, $T_A\geq 1$.
+		
+		$$P(X_{n+1}\in A | \mathcal{F}_n) = p(X_n, A)$$
+		
+		$$\forall i \quad P_i(X_{n+1}\in A_i, X_{n+2}\in A_2 | \mathcal{F}_n)  =\int\limits_{A_1} p(X_n, \dd{e_1})\int\limits_{A_2} p(X_n, \dd{e_2}) = P(\hat{X}_1\in A_1, \hat{X}_2\in A_2)$$
+		where $\hat{X}_i = X_{n+i}$.
+		
+		Moreover 
+		$$P(X_{n+i} \in F|\mathcal{F}_i) = P_{X_n} (\hat{X}_i \in F)$$
+		
+		Thus
+		$$\mathbb{E} \qty[g(X_{T_A})|\mathcal{F}_1] = \mathbb{E}_{X_1} \qty[g(X_{T_A})] = h(X_1)$$
+		and
+		
+		$$h(i) = \mathbb{E}_i \qty[\mathbb{E} \qty[g(X_{T_A})|\mathcal{F}_1]] = \mathbb{E}_i [h(X_1)] = \sum_j p_{ij} h_j = p\cdot h$$
+	\end{proof}
+\end{lemma}

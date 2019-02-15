@@ -1,0 +1,24 @@
+\begin{theorem}[L\'{e}vy Inversion]
+	Let $a<b \in \mathbb{R}$. Then
+	$$\lim_{T\to \infty} \frac{1}{2\pi}\int_{-T}^{T}  \frac{e^{-i\theta a}-e^{-i\theta b}}{i\theta} \phi_X(\theta) \dd{\theta} = \frac{\mu(\left\{a\right\})}{2} + \mu((a,b)) + \frac{\mu(\left\{b\right\})}{2} = \frac{1}{2} [F(b) + F(b^-)] - \frac{1}{2} [F(a) + F(a^-)]$$ 
+	\begin{proof}
+		$$\frac{e^{-i\theta a} - e^{-i\theta b}}{i\theta} = \int_a^b e^{-i\theta \lambda} \dd{\lambda}$$
+		\begin{align*}
+		 \frac{1}{2\pi}\int_{-T}^{T}  \frac{e^{-i\theta a}-e^{-i\theta b}}{i\theta} \phi_X(\theta) \dd{\theta} =  \frac{1}{2\pi}\int_{-T}^{T}  \qty[\int_a^b e^{-i\theta \lambda} \dd{\lambda}] \phi_X(\theta) \dd{\theta}= \int_a^b \mathbb{E} \qty[ \frac{1}{2\pi}\int_{-T}^{T}  e^{i\theta (X-\lambda)}  \dd{\theta}] \dd{\lambda} =\\=
+		  \mathbb{E} \qty[ \frac{1}{2\pi} \int_a^b \int_{-T}^{T}  \frac{e^{iT (X-\lambda)} - e^{-iT (X-\lambda)} }{2i(X-\lambda)T}  \dd{\lambda T}]  = \mathbb{E} \qty[\frac{1}{\pi} \int_{aT}^{bT} \frac{\sin(XT-u)}{XT-u} \dd{u}] = \mathbb{E} \qty[\frac{1}{\pi} \int_{(a-X)T}^{(b-X)T} \frac{\sin(v)}{v} \dd{v}]
+		\end{align*}
+		$$\lim_{T\to \infty} \mathbb{E} \qty[\frac{1}{\pi} \int_{(a-X)T}^{(b-X)T} \frac{\sin(v)}{v} \dd{v}]  = \frac{1}{2} \chi_{a-X=0}+ \frac{1}{2} \chi_{a-X<0<b-X}}+ \frac{1}{2} \chi_{0=b-X}$$
+		By DCT it converges.	
+\end{proof}
+\end{theorem}
+
+
+
+\begin{theorem}[CLT]
+	Let $X_i$ be iid with mean $0$ and variance $1$. Let $S_n = \sum_n X_i$ then
+	$$\frac{S_n}{\sqrt{n}} \stackrel{w.}{\to} N(0,1)$$
+	\begin{proof}
+		$$\phi_{\frac{S_n}{\sqrt{n}}} = \qty(\phi_X\qty(\frac{\theta}{\sqrt{N}}))^n $$
+		We claim $\qty(\phi_X\qty(\frac{\theta}{\sqrt{N}}))^n \to e^{-\frac{\theta^2}{2}}$.
+	\end{proof}
+\end{theorem}

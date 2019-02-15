@@ -1,0 +1,157 @@
+\begin{definition}
+	Let $f=g-h$ a.s. such that $g,h\geq 0$, and at most one of $\int g\dd{\mu}, \int h\dd{\mu}$ is infinite. Then define
+	$$\int f\dd{\mu} = \int g\dd{\mu} -\int h\dd{\mu}$$
+\end{definition}
+\begin{prop}
+$\int f\dd{\mu}$ is well defined.
+\begin{proof}
+	If $g_1-h_1=f=g_2-f_2$ a.s. it is true that
+	$$g_1-g_2+h_2-h_1 = 0$$
+	$$g_1+h_2=g_2+h_1$$
+	$$\int g_1 \dd{\mu} + \int h_2 \dd{\mu} = \int g_2\dd{\mu} + \int h_1\dd{\mu}$$
+	Since maximum one term on each side is infinite we can move the other one to the second side, getting the 
+	$$\int g_1 \dd{\mu} -\int g_2\dd{\mu}  = \int h_1\dd{\mu} - \int h_2 \dd{\mu} $$
+	as required
+\end{proof}
+\end{prop}
+
+\begin{definition}
+	$$f^\pm(\omega) = \max \left\{ \pm f(\omega), 0 \right\}$$
+\end{definition}
+
+\begin{definition}
+	We say $f\in L^1(\mu)$ if $\exists g,h$ such that $f=g-h$ $\int g \dd{\mu} + \int h\dd{\mu} <\infty$.
+	
+	For $f \in L^1(\mu)$, $\int f \dd{\mu} = \int f^+ \dd{\mu} - \int f^- \dd{\mu}$.
+	
+	$\abs{f} = f^++f^-$ and $f\in L^1(\mu) \iff \int \abs{f}\dd{\mu} <\infty$.
+\end{definition}
+
+\begin{lemma}
+	$L^1(\mu)$ is a vector space.
+	\begin{proof}
+		$f,g \in L^1(\mu)$ thus, since $\abs{f+g} \leq \abs{f}+\abs{g}$, $f+g\in L^1(\mu)$.
+		
+		$$\int f+g \dd{\mu} = \int f^++g^+ \dd{\mu} - \int f^- + g^- \dd{\mu} = \int f\dd{\mu} + \int g\dd{\mu} $$
+	\end{proof}
+\end{lemma}
+
+If $\norm{f}_1 = \int f \dd{\mu} $ then $\norm{}_1$ is a norm on $L^1(\mu)$
+
+Further $L^1(\mu)$ is complete, i.e., each Cauchy sequence converges.
+
+\begin{lemma}[Reverse Fatou's Lemma]
+	 Let $\left\{  f_n\right\}$ be a sequence of functions such that $0\leq f_n\leq g$ such that $\int g\dd{\mu} <\infty$. Then
+	 $$\int \limsup f_n \dd{\mu}\geq \limsup \int f_n \dd{\mu}$$
+	 \begin{proof}
+	 	Let $h_n = g-f_n$. By \ref{fatou} $$\int \liminf h_n \dd{\mu} \leq \liminf \int h_n \dd{\mu}$$
+	 	Using the fact $\liminf h_n = g -\limsup f_n$ we get the result.
+	 \end{proof}
+\end{lemma}
+\begin{theorem}[Lebesgue's dominated convergence theorem ]
+	Let $f_n$ be a sequence such that $\abs{f_n}\leq g$ and $g\in L^1(\mu)$ and $f_n\to f$ then
+$$\int f_n \to \int f$$
+and 
+$$\int \abs{f_n-f} \to 0 $$
+\begin{proof}
+	We first proof that $\int f_n \to \int f$.
+	
+	
+	Sine $\abs{f_n} < g$, $g\pm f_n \geq 0$. Applying \ref{fatou} to $g\pm f_n $:
+	$$\int \liminf f_n \leq \liminf \int f_n$$
+	$$\int f \leq \liminf \int f_n$$
+	and
+	$$\int \liminf (-f_n) \leq \liminf \int (-f_n)$$
+	$$\int \limsup f_n \geq \limsup \int f_n$$
+	$$\int f \geq \limsup \int f_n \geq \liminf \int f_n \geq \int f$$
+	
+	We have $h_n = \abs{f_n-f}$, and $h_n \stackrel{a.s.}{\to} 0$ and $h_n \leq 2g$ so by first statement
+	$$0 = \lim_{n\to \infty} \int h_n$$
+	
+\end{proof}
+\end{theorem}
+
+\subsection{Integration on probability spaces and integration}
+\begin{definition}[Expectation]
+	Let $(\Omega, \mathcal{F}, P)$ be a probability space and $X: \Omega \to \mathbb{R}$ be a random variable.
+	$$\mathbb{E}\qty[X] =  \int X(\omega) \dd{P(\omega)}$$
+\end{definition}
+\begin{theorem}[Bounded convergence theorem] \label{bct}
+	Let $X_n \to X$ a.s. and $\abs{X}_n \leq C$. Then $\mathbb{E} \qty[\abs{X}_n-X] to 0$.
+	\begin{proof}[independent of DCT]
+		Define $E_{\epsilon} = \left\{ \omega : \abs{X_n(\omega) - X(\omega)} < \epsilon \right\}$.
+		
+		$$\mathbb{E} \qty[\abs{X_n(\omega) -X}] = \mathbb{E} \qty[\abs{X_n - X} \mathds{1}_{E_\epsilon}]+\mathbb{E} \qty[\abs{X_n - X} \mathds{1}_{E_\epsilon^C}]$$
+		Since $\abs{X_n - X} \mathds{1}_{E_\epsilon} \leq \epsilon \mathds{1}_{E_\epsilon}$ and $\abs{X_n - X} \mathds{1}_{E_\epsilon^C} \leq 2C \mathds{1}_{E_\epsilon^C}$:
+		
+		$$\mathbb{E} \qty[\abs{X_n(\omega) -X}] \leq \epsilon \mathds{1}_{E_\epsilon} + 2C \mathds{1}_{E_\epsilon^C} \leq \epsilon + 2c P\qty((E_\epsilon^n)^C) $$
+		
+		For some $m>n$
+		$$\quad (E_\epsilon^n)^C = \left\{ \omega : \abs{X_n - X} >\epsilon \right\} \subseteq  \left\{ \omega : \abs{X_m - X} >\epsilon \right\}$$
+		
+		$$ \bigcap_n F_{n,\epsilon} = \left\{ \omega : \limsup \abs{X_n -X} => \epsilon \right\}$$
+		By continuity of measure
+		$$\lim_{n\to \infty} P(F_{n,\epsilon}) =0$$
+		$$\lim_{n\to \infty} P\qty((E_\epsilon^n)^C)  =0$$
+	\end{proof}
+\end{theorem}
+
+\begin{definition}
+	Let $A\in \mathcal{F}$. 
+	$$\int_A f \dd{\mu} = \mu(f;A) = \mu(f\mathds{1}_A)$$
+	
+	We can look on it as constructing a new measure space:
+	$\qty(S\cap A = A, \mathcal{F}_A, \eval{\mu}_A)$
+	
+	We claim that 
+	$$\eval{\mu}_A (f)= \mu (f\mathds{1}_A)$$
+\end{definition}
+
+\begin{prop}[The standard machine]
+	\begin{enumerate}
+		\item Check for $\mathds{1}_E$.
+		\item Check for simple functions (use linearity)
+		\item Use MCT to check positive functions.
+		\item Use linearity to extend to $L^1$. 
+	\end{enumerate}
+\end{prop}
+\begin{prop}
+	If $h,g: \mathbb{R}\to \mathbb{R}$ are Borel-measurable and $X$,$Y$ are independent, then $h(X)$, $g(Y)$ are independent.
+	\begin{proof}
+		$h(X)$, $g(Y)$ are measurable, and $\sigma$-algebras generated by then are sub-$\sigma$-algebras of original ones, and thus they're independent.
+	\end{proof}
+\end{prop}
+\begin{prop}
+	Suppose $X,Y \in L^1$ are independent and in $L_1$, then $X\cdot Y \in L_1$ and
+	$$\mathbb{E}\qty[XY] = \mathbb{E}\qty[X] \cdot \mathbb{E}\qty[Y]$$
+	
+	\begin{proof}
+		$X=X^+-X_-$ and $Y=Y^+-Y^-$, by linearity its enough to check for $X^{\pm}$, $Y^\pm$.
+		
+		So we can assume $X,Y>0$. Denote $X_N = \max\left\{ X, N \right\}$, $Y_N = \max\left\{ X, N \right\}$, from \ref{mct} if the claim holds for $X_N$, $Y_N$, then it holds for $X$, $Y$.
+		
+		Since now $X$, $Y$ are bounded, we can find simple functions $\alpha^{(r)}(X) \to X$, $\alpha^{(r)}(Y) \to Y$. 
+		
+		From \ref{bct} the identity would hold for bounded functions if it holds for simple functions. From linearity it's enough to show for indicators:
+		$$\mathbb{E} \mathds{1}_E(X) \mathds{1}_F(Y)  = P(X \in E, Y\in F) = P(X\in E)P(Y\in F) = \mathbb{E} \mathds{1}_E(X) \cdot \mathbb{E}  \mathds{1}_F(Y)$$
+	\end{proof}
+\end{prop}
+
+\begin{prop}
+	Let $X: (\Omega, \mathcal{F}) \to \qty(\mathbb{R}, \mathcal{B})$. Let $\mu_X$ be a law of $X$ on $\mathbb{R}$:
+	$$\mu_X(B) = P(X\in B)$$
+	let $h: \mathbb{R} \to \mathbb{R}$, then $\mathbb{E}\qty[h(X)] = \int_{\mathbb{R}} h(x) \mu_X(\dd{x})$
+	\begin{proof}
+		Use the Standard machine.
+	\end{proof}
+ 	\begin{proof}
+	\end{proof}
+\end{prop}
+
+\begin{definition}
+	Say $\nu \triangleleft \mu$ if $\mu(A) = 0 \Rightarrow \nu(A) = 0$. We say $\mu$ is absolutely continuous with respect to $\mu$.
+\end{definition}
+
+\begin{theorem}
+	$S, \mathcal{F}$ is nice. $\nu  \triangleleft \mu \iff \exists f\in L^1(\mu)$ and $f\geq 0$, $\int f \dd{\mu} = 1$ such that $\nu(A) = \int_A f \dd{\mu}$. We call $f = \pdv{\nu}{\mu} $ a Radon-Nikodym derivative.
+\end{theorem}

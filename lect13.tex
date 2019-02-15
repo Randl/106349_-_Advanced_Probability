@@ -1,0 +1,52 @@
+
+$P(X=\vdot|Z=_j$ is probability measure on $\left\{ x_1, \dots, x_m \right\}$ for $j$ fixed. $\mathbb{E}\qty[X|z=z_j] = \sum_i x_i P(X=x_i|z=z_j$ is a conditional expectation. note that it is random variable: $\mathbb{E}[X|Z] = \sum_j \mathbb{E}[X|Z=z_j$]. 
+
+Properties
+\begin{enumerate}
+\item $\mathbb{E}\qty[X|Z] \in \sigma(Z)$
+\item $\forall A \in \sigma(Z)$
+$$\mathbb{E}\qty\bigg[\mathds{1}_A \cdot \mathbb{E}[X|Z] ] = \mathbb{E}\qty[\mathds{1}_A X]$$
+
+It's enough to check for $A=\left\{ z_j \right\}$:
+$$\mathbb{E}\qty\bigg[\mathds{1}_A \mathbb{E}[X|Z]] =  P(Z=z_j)\mathbb{E}\qty\bigg[\mathbb{E}[X|z_j]] =  \sum_i x_i P(X=x_i, Z=z_j) = \mathbb{E}\qty[\mathds{1}_A X]$$
+
+
+\end{enumerate}
+\begin{definition} 
+We say that $Y$ is a conditional expectation of $Z$ given $\mathcal{J}$ if $Y\in\mathcal{J}$, $Y\in L^1(P)$ and $\forall A \in \mathcal{J}$ $\mathbb{E}[Y\mathds{1}_A] = \mathbb{E}[X\mathds{1}_A]$
+\end{definition}
+
+\begin{lemma}
+If conditional expectation $Y$ exists, it is unique up to sets of measure $0$. Henceforth call $Y$ by $\mathbb{E}[X|\mathcal{J}]$
+\begin{proof}
+Let $Y$, $Y'$ two conditional expectations. We'll show that $Y>Y'$ $P$ a.s. then by symmetry $Y=Y'$ $P$ a.s.
+
+Let $A_n = \left\{ Y>Y' + \frac{1}{n} \right\}$, $A_n \in \mathcal{J}$.
+\end{proof}
+\end{lemma}
+
+
+\paragraph{$L^2(P)$ remark}
+For $X,Y\in L^2(P)$  define $\langle X, Y \rangle = \mathbb{E}[XY]$  and $\norm{X} = \sqrt{\langle X, X \rangle} = \sqrt{\mathbb{E}[X^2]}$.
+Parallelogram law:
+$$\norm{X+Y}^2 + \norm{X-Y}^2 = 2\norm{X}^2 + 2\norm{Y}^22$$
+\begin{theorem}
+	Let $K\subseteq L^2(P)$ be a closed convex subset, $X \in  L^2(P)$ then $\exists ! Y\in K$ such that $\inf \left\{ \norm{X-Z}: z\in K \right\} = \norm{X-Y}$, call $Y=P_K(X)$.
+	\begin{proof}
+		Let $Y_n \in K$ such that $\norm{X-Y_n} \to \Delta = \inf \left\{ \norm{X-Z}: z\in K \right\} $
+		
+		We claim $Y_n$ is Cauchy.
+		$$\norm{X-Y_n}^2 + \norm{X-Y_m}^2 = 2\norm{X - \frac{Y_n+Y_m}{2}}^2 + \frac{1}{2} \norm{Y_n-Y_m}^2$$
+	Since $\frac{Y_n+Y_m}{2} \in K$ by convexity, thus
+	$$ 2\norm{X - \frac{Y_n+Y_m}{2}}^2 + \frac{1}{2} \norm{Y_n-Y_m}^2 \geq 2\Delta^2 + \frac{1}{2} \norm{Y_n-Y_m}^2$$
+and 
+	$$\norm{X-Y_n}^2 + \norm{X-Y_m}^2 \to 2\Delta^2$$
+	thus	$$ \frac{1}{2} \norm{Y_n-Y_m}^2 \to 0$$
+i.e., $\left\{ Y_n \right\}$ is Cauchy and thus the limit exists and is in $K$.
+
+If there are two different sequences, then from same identity, the distance between limits goes to $0$.               
+	\end{proof}
+\end{theorem}
+\begin{theorem}
+	If $X\in L^1$ and $\mathcal{J} \subseteq  \mathcal{F}$ then $\mathbb{E} [X|\mathcal{J} ]$ exists
+\end{theorem}

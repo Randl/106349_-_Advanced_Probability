@@ -1,0 +1,79 @@
+\begin{definition}
+	$P_K(X) = Y$, $P_K: L^2(P) \to V$. Then $P_K(X)$ is linear, contractive and self-adjoint.
+\end{definition}
+
+We want to use $P_K$ to define $\mathbb{E}\qty[X|\mathcal{J}]$.
+\begin{itemize}
+	\item For all $\mathcal{J} \subset \mathcal{F}$ containing all sets of measure $0$ $\left\{ Y, \mathbb{E} \qty[Y^2] \right\}$ forms a closed subspace of $L^2(P)$ and $L^2(\Omega, \mathcal{J}, P)$ is called complete measure space.
+	 \item $L^2(\Omega, \mathcal{J}, P)$ is complete by Lemma.
+	 \item $L^2(\Omega, \mathcal{J}, P) \subseteq L^2(\Omega, \mathcal{F}, P)$
+\end{itemize}
+
+\begin{definition}
+	For $X \in L^2(\Omega, \mathcal{F}, P)$ and $\mathcal{J} \subseteq \mathcal{F}$ is complete then
+	$$\mathbb{E} \qty[X | \mathcal{F}] = P_{L^2(\Omega,\mathcal{J},P)} (X)$$
+\end{definition}
+
+\begin{prop}
+	$$\mathbb{E} \qty[\mathds{1}_A X] = \mathbb{E} \qty[\mathds{1}_A P \cdot (X)]$$
+	\begin{proof}
+		The statement is equvivalent to
+		$$\left\langle \mathds{1}_A, X\right\rangle = \left\langle \mathds{1}_A, P_{L^2(\mathcal{J})}X \right\rangle$$
+		However for $Y\in L^2(\Omega, \mathcal{J}, P)$, $P\cdot Y= Y$:
+		$$\left\langle \mathds{1}_A, X\right\rangle = \left\langle P\cdot \mathds{1}_A, X \right\rangle=\left\langle  \mathds{1}_A,  P\cdot X  \right\rangle$$
+	\end{proof}
+\end{prop}
+
+\begin{lemma}
+	If $X\geq 0$ a.s. and $X\in L^2$ then $\mathbb{E} \qty[X | \mathcal{J}] \geq 0$ a.s.
+	\begin{proof}
+		Let $A_n = \left\{ \omega : \mathbb{E}[X|\mathcal{J}] <\frac{1}{n} \right\}$. We clame $P(A_n=0)$.
+		$$0 \leq \mathbb{E}\qty[\mathds{1}_{A_n} X] =  \mathbb{E}\qty[\mathds{1}_{A_n} \mathbb{E}\qty[X|\mathcal{J}]] \leq -\frac{1}{n} \mathds{1}_{A_n} \Rightarrow P(A_n) = 0 $$
+	\end{proof}
+\end{lemma}
+
+Note that to define conditional expectation $\mathbb{E}[X|\mathcal{J}]$ for $X\in L^1$, we can assume $X>0$, since we can define 
+$$\mathbb{E}[X|\mathcal{J}] = \mathbb{E}[X^+|\mathcal{J}]  - \mathbb{E}[X^-|\mathcal{J}] $$
+
+So, let $X_n=\max\left\{X, n\right\}$, then $X_n \in L^2(\mathcal{F})$ so $\mathbb{E}[X_n | \mathcal{J}]$ exists, and $X_n \uparrow X$. We want that (a.s.) $\mathbb{E}[X_n | \mathcal{J}] \uparrow_n $
+
+Take a look at $X_n-X_m\geq 0$ for $n>m$:
+$$\mathbb{E}\qty[X_n-X_m| \mathcal{J}] \geq 0$$
+thus
+$$\mathbb{E}\qty[X_n| \mathcal{J}] \geq \mathbb{E}\qty[X_m| \mathcal{J}]$$
+so the sequence is increasing.
+
+Let us define
+$$\mathbb{E}[X | \mathcal{J}] = \lim_{n\to \infty} \mathbb{E}[X_n | \mathcal{J}]$$
+
+Now $\forall A \in \mathcal{J}$, from monotone convergence,
+$$\mathbb{E}\qty[\mathds{1}_AX_n] \to \mathbb{E}\qty[\mathds{1}_AX]$$
+$$\mathbb{E}\qty[\mathds{1}_AX_n] = \mathbb{E}\qty[\mathds{1}_A\mathbb{E} \qty[X_n | \mathcal{J}]]$$
+and also
+$$\mathbb{E}\qty[\mathds{1}_A\mathbb{E} \qty[X_n | \mathcal{J}]] \to \mathbb{E}\qty[\mathds{1}_A\mathbb{E} \qty[X | \mathcal{J}]]$$
+and thus
+$$\mathbb{E}\qty[\mathds{1}_AX] = \mathbb{E}\qty[\mathds{1}_A\mathbb{E} \qty[X | \mathcal{J}]]$$
+i.e., it is the conditional expectation.
+
+\begin{prop}[Properties of conditional expectations]
+	
+	\begin{enumerate}
+		\item If $Y = \mathbb{E}\qty[X| \mathcal{J}]$ a.s., then $\mathbb{E}[X] = \mathbb{E}[Y]$
+		\item If $X\in \mathcal{J}$, $\mathbb{E}\qty[\mathbb{X|\mathcal{J}} ]= X$ a.s.
+		\item $$\mathbb{E} \qty[aX+Y|\mathcal{J}] = a \mathbb{E} \qty[X|\mathcal{J}]+ \mathbb{E} \qty[Y|\mathcal{J}]$$
+		\item If $X\geq 0$  then $ \mathbb{E}[X| \mathcal{J}] \geq 0$
+		\item If $X_n\uparrow X $  then $ \mathbb{E}[X_n| \mathcal{J}] \uparrow \mathbb{E}[X| \mathcal{J}]$
+		\item If $X_n \geq 0$ 
+		$$ \mathbb{E}[\liminf X_n| \mathcal{J}]  \leq \liminf \mathbb{E}[X_n| \mathcal{J}] $$
+		\item $\abs{X_n} \leq V(w)$ and $\mathbb{E}[V] < \infty $, $X_n \to X$ a.s., then 
+		$$ \mathbb{E}[X_n| \mathcal{J}] \to \mathbb{E}[X| \mathcal{J}]$$
+		\item 
+		$$\mathbb{E} \qty[c(X) | \mathcal{J}] \geq c(\mathbb{E} \qty[X | \mathcal{J}])$$
+		\item For $\mathcal{H} \subseteq \mathcal{J} \subset\mathcal{F}$
+			$$\mathbb{E} \qty[\mathbb{E}[X| \mathcal{J}] | \mathcal{H}] = \mathbb{E}[X| \mathcal{H}]$$
+		\item For $Z\in \mathcal{J}$:
+		$$\mathbb{E}[ZX| \mathcal{J}]  =Z \mathbb{E}[X| \mathcal{J}] $$
+		\item For $\mathcal{H}$ independent on $\sigma(X, \mathcal{J})$:
+		$$\mathbb{E}[X| \sigma\qty(\mathcal{J}, \mathcal{H})] = \mathbb{E}[X| \mathcal{J}]$$
+	\end{enumerate}
+\end{prop}

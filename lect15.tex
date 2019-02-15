@@ -1,0 +1,69 @@
+\begin{prop}[Jensen's inequality]
+	\begin{proof}
+		So let
+		$$S = \left\{ a,b | ax+b\leq c(x) \right\} $$
+		Let $S'\subset S$ be a countable dense subset.
+		$$\forall a,b\in S' \quad a\mathbb{E} [X|\mathcal{J}] +b \leq \mathbb{E} [c(X)|\mathcal{J}]$$
+		
+		Since for convex function
+		$$c(x) = \sup\limits_{ax+b\leq c(x)} \left\{ ax+b \right\}$$
+		Optimizing over $S'$ we get the Jensen inequality.
+	\end{proof}
+\end{prop}
+\begin{prop}[H\"{o}lder's inequality]
+	$$\abs{\mathbb{E} [X|\mathcal{J}]}^{p} \leq \mathbb{E} [X^p|\mathcal{J}]$$
+	If $\frac{1}{p}+\frac{1}{q}=1$:
+	$$\abs{\mathbb{E} [XY|\mathcal{J}]} \leq \qty(\mathbb{E} [\abs{X}^p|\mathcal{J}])^{\frac{1}{p}} + \qty(\mathbb{E} [\abs{Y}^q|\mathcal{J}])^{\frac{1}{q}}$$
+\end{prop}
+\begin{prop}[Minkowski's inequality]
+$$\abs{\mathbb{E} [(X+Y)^p|\mathcal{J}]}^{\frac{1}{p}} \leq \abs{\mathbb{E} [X^p|\mathcal{J}]}^{\frac{1}{p}} + \abs{\mathbb{E} [Y^p|\mathcal{J}]}^{\frac{1}{p}}$$
+\end{prop}
+
+
+\paragraph{Example}
+Let $X$, $Z$ be random variable.
+$$P\qty((X,Z)\in A) = \int\limits_A f_{(X,Z)} (x,z) \dd{x} \dd{z}$$
+where $f_{(X,Z)} $ is called the joint distribution
+
+\begin{prop}
+$$\mathbb{E}[h(x) | \sigma(Z)] = \frac{\int f(x,z) h(x) \dd{x}}{\int f(x,z) \dd{x}} \mathds{1}_{\int f(x,z) \dd{x} \neq 0} = \phi(z)$$
+
+\begin{proof}
+	We want to check that
+$$\mathbb{E}[h(X); z\in \mathcal{B} ] =\mathbb{E}[\phi(z); z\in \mathcal{B}$$
+$$\mathbb{E}[\phi(z); z\in \mathcal{B} ]=\mathbb{E}[\phi(z)\mathds{1}_{z\in \mathcal{B}}] = \int  \phi(z) \mathds{1}_{z\in \mathcal{B}} f(x,z) \dd{x} \dd{z} $$
+$$\mathbb{E}[h(X); z\in \mathcal{B} ]  = \int \dd{z} \qty[\int f(x,z) h(x) \dd{x}] \mathds{1}_{z\in \mathcal{B}} = \int \qty[\frac{\int f(x,z) h(x) \dd{x}}{\int f(x,z) \dd{x}}]  \mathds{1}_{z\in \mathcal{B}} f(u,z)\dd{u}\dd{z} = \int  \phi(z) \mathds{1}_{z\in \mathcal{B}} f(x,z) \dd{x} \dd{z} $$
+\end{proof}
+\end{prop}
+
+Suppose $\mathcal{H}, \mathcal{J} \subseteq \mathcal{F}$ $\sigma$-algebras. We want to regard 
+$$X\in \mathcal{H}\mapsto \mathbb{E}\qty[X|\mathcal{J}]$$
+as the expectation corresponding to some probability distribution.
+
+$$P(A|\mathcal{J}) = \mathbb{E}\qty[\mathds{1}_A|\mathcal{J}]$$
+So $A,\omega \mapsto P(A||\mathcal{J})(\omega)$ is random set function on $\mathcal{H}$. For $\omega$ fixed a.s. is this a probability measure? Generally, no.
+
+
+\begin{definition}
+Let $P(\cdot, \cdot): \mathcal{F}\times \Omega \mapsto [0,1]$
+We say that $P$ is a regular conditional probability distribution for $\mathcal{J}$ if
+\begin{enumerate}
+	\item $\forall F\in \mathcal{F} $, $P(F, \cdot)$ is a version of $\mathbb{E}\qty[\mathds{1}_F|\mathcal{J}]$.
+	\item a.e. $\omega\in \Omega $, $P(\cdot, \omega)$ is a probability measure on $\qty(\Omega, \mathcal{F})$.
+\end{enumerate}
+\end{definition}
+
+\begin{prop}
+	
+	Let $X_1,\dots, X_k$ be independent random variables. Given $h \in \mathcal{B}(\mathbb{R}^k)$
+	$$\gamma_n(x) = \mathbb{E} \qty[h(x,X_2, \dots X_k)]$$
+	then
+	$$\gamma(X_1) = \mathbb{E} \qty[h(X_1, \dots, X_k) | \sigma(X_1)]$$
+	
+	\begin{proof}
+		If $C = \left\{ h\in \mathcal{B}(\mathbb{R}^k) \text{ s.t. identity holds } \right\}$ then we check that $C$ is monotone class.
+		
+		Note, for $A = A_1 \times \dots \times A_k$ then
+		$$\mathbb{E} \qty[\mathds{1}_{A_1}\dots\mathds{1}_{A_k} | \sigma(X_1)] = \mathds{1}_{A_1} \mathbb{E} \qty[\mathds{1}_{A_2}\dots\mathds{1}_{A_k} | \sigma(X_1)] = \mathds{1}_{A_2} P(A_2\cap \dots \cap A_k) = \gamma_n(x)$$
+	\end{proof}
+\end{prop}

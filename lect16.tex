@@ -1,0 +1,111 @@
+\paragraph{Example}
+Let $\left\{ X_i\right\}_{i=1}^\infty$ i.i.d. random variables and define
+$$S_n = \sum_{i=1}^n X_i$$
+Let 
+$$\mathcal{G}_n = \sigma(S_n, S_{n+1}, \dots ) = = \sigma(S_n, X_{n+1}, \dots )$$
+
+What is
+$$\mathbb{E}\qty[X_1|\mathcal{G}_n] = \mathbb{E}\qty[X_1|\sigma(\sigma(S_n), \sigma(X_{n+1}, \dots ))]$$
+Since both $X_1$ and$S_n$ is independent on $ \sigma(X_{n+1}, \dots )$ we can rewrite as
+$$\mathbb{E}\qty[X_1|\mathcal{G}_n] = \mathbb{E}\qty[X_1|\sigma(\sigma(S_n), \sigma(X_{n+1}, \dots ))]= \mathbb{E}\qty[X_1|\sigma(S_n)]$$
+
+We claim that
+$$\mathbb{E} [X_1 | S_n] = \frac{1}{n} S_n$$
+since for $i \leq n$
+$$\mathbb{E} [X_1 | S_n] = \mathbb{E} [X_i | S_n]$$
+Since
+$$\mathbb{E}\qty[\mathbb{E}\qty[X_i|S_n]; \mathds{1}_{S_n \in B}] = \mathbb{E}\qty[X_i; \mathds{1}_{S_n \in B}] = \int\limits_{\mathbb{R}^n} x_i \mathds{1}_{B}(x_1+x_2+\dots x_n) \prod_{i=1}^n \dd{\mu(x_i)} = \int\limits_{\mathbb{R}^n} x_1 \mathds{1}_{B}(x_1+x_2+\dots x_n) \prod_{i=1}^n \dd{\mu(x_i)} = \mathbb{E}\qty[X_1; \mathds{1}_{S_n \in B}] = \mathbb{E}\qty[\mathbb{E}\qty[X_1|S_n]; \mathds{1}_{S_n \in B}]$$
+
+thus
+$$S_n  =\mathbb{E}[S_n|S_n] = \sum_{k=1}^n \mathbb{E}[X_k|S_n] = n\mathbb{E}\qty[X_1|S_n]$$
+\section{Martingales}
+\begin{definition}[Filtration]
+	$\left\{ \mathcal{F}_i \right\}_{i=0}^\infty$ sequence of $\sigma$-algebras is a filtration if $$\mathcal{F}_0 \subseteq \mathcal{F}_{1} \subseteq \dots \subseteq \mathcal{F}_{\infty} \subseteq \mathcal{F}$$
+	where $\mathcal{F}_\infty = \sigma\qty(\bigcup_{i=1}^\infty \mathcal{F}_i)$
+\end{definition}
+
+\paragraph{Example}
+Let $\left\{  W_i \right\}_{i=0}^\infty$ sequence of random variables (stochastic process). Let $\mathcal{F}_i = \sigma\qty(W_0, \dots W_i)$, then
+$\left\{ \mathcal{F}_i \right\}_{i=0}^\infty$ is a filtration.
+\begin{definition}[Martingale]
+	A sequence $\left\{  X_n \right\}_{n=0}^\infty$ (sub-/super-) martingale with respect to $\left\{ \mathcal{F}_n \right\}_{n=0}^\infty$ if 
+	\begin{enumerate}
+		\item $X_n \in L^1(\mathcal{F}_n, P)$
+		\item $\mathbb{E} \qty[X_{n+1} | \mathcal{F}_n] = X_n$ ($\geq$ for sub- and $\leq$ for super-).
+	\end{enumerate}
+\end{definition}
+
+We may assume $X_n=0$ since if $X_n$ is martingale, so is $Y_n=X_n-X_0$.
+\paragraph{Example} 
+Let $X_i$ be i.i.d. and $X_i\geq 0$ with $\mathbb{E}[X_i] = 1$. 
+$$M_n  = \prod X_i$$
+Then
+$$\mathbb{E}\qty[M_{n+1}|\mathcal{F}_n] = \mathbb{E} \qty[\prod_{1}^{n+1} X_i| \mathcal{F}_n] = \mathbb{E} \qty[X_{n+1}|\mathcal{F}_n] \prod X_i = \prod 1 \cdot \prod X_i = M_n$$
+\paragraph{Example} 
+Consider $\va{X}_i$ i.i.d. vectors in $\mathbb{R}^d$ with natural filtration $\mathcal{F}_n$ and
+$$\va{S}_n = \sum \va{X}_i$$
+$$\mathbb{E} \qty[\va{S}_{n+1} | \mathcal{F}_n] = \va{S}_n + \mathbb{E} \qty[\va{X}_{n+1} | \mathcal{F}_n]$$
+Thus if $\mathbb{E} \qty[\va{X}_{n+1} | \mathcal{F}_n] = 0$, $\va{S}_n$ is martingale.
+
+\paragraph{Example}
+Let $d=2$ and $\va{X}_i$ be equiprobable out of $\pm \epsilon \vu{x}$, $\pm\epsilon \vu{y}$.
+
+Given $f \in \mathcal{C}^3\qty(\mathbb{R}^2)$ consider $Z_n = f(S_n^\epsilon)$
+
+\begin{definition}
+	$f$ is (sub-/super-) harmonic if $Z_n$ is a (sub-/super-) martingale
+\end{definition}
+
+What happens for small $\epsilon$:
+\begin{align*}
+\mathbb{E} \qty[f(X_{n+1} | \mathcal{F}_n)] = \frac{1}{4} \qty(f(\epsilon \vu{x} + S_n)+f(-\epsilon \vu{x} + S_n)+f(\epsilon \vu{y} + S_n)+f(-\epsilon \vu{y} + S_n))  =\\= f(S_n) + \frac{1}{4}\qty\bigg(\qty\big[f( S_n+\epsilon \vu{x})-f(S_n)]+\qty\big[f(S_n-\epsilon \vu{x})-f(S_n)]+\qty\big[f(\epsilon \vu{y} + S_n)-f(S_n)]+\qty\big[f(-\epsilon \vu{y} + S_n)) -f(S_n)] 
+\end{align*}
+
+For Taylor expansion we get
+$$f(\epsilon \vu{x}+ \va{S}_n) = \epsilon \pdv{f}{x} + \frac{\epsilon^2}{2} \pdv[2]{f}{x} + \order{\epsilon^3}$$
+thus\begin{align*}
+\mathbb{E} \qty[f(X_{n+1} | \mathcal{F}_n)] = f(S_n) + \frac{\epsilon^2}{4} \laplacian{f} + \order{\epsilon^3} 
+\end{align*}
+
+i.e., we get a condition on the Laplacian of $f$which decides whether $Z_n$ is martingale.
+
+\paragraph{Information exposure martingale}
+For some $\left\{ \mathcal{F}_n \right\}_{n=1}^\infty$ and $X \in L^1(\Omega, \mathcal{F}, P)$
+\begin{itemize}
+	\item $M_n = \mathbb{E} \qty[X|\mathcal{F}_n]$ is a martingale by tower property.
+	\item From Jensen $Z_n = \phi(M_n)$ is submartingale if $\phi$ is convex.
+\end{itemize}
+
+We'll show that
+$$M_n \stackrel{L_1 \text{ a.s.}}{\to} \mathbb{E} \qty[X|\mathcal{F}_\infty]$$
+We are interested when $X = \mathbb{E} [X|\mathcal{F}_\infty]$.
+\paragraph{Example}
+Let $X_n$, $\mathcal{F}_n$ be martingale. $X_n-X_{n-1}$ is an amount we won in $n^{th}$ game.
+
+\begin{definition}
+	$C_n$ is predictable if $C_n\in \mathcal{F}_{n-1}$.
+\end{definition}
+\begin{definition}[Discrete stochastic integral]
+	Discrete stochastic integral with respect to $X$ is 
+	$$(C \circ X)_n = \sum_{j=1}^n C_j\qty(X_j-X_{j-1})$$
+	i.e., total amount won at time $n$ won using strategy using gambling strategy $C$.
+\end{definition}
+
+\begin{prop}
+	If $X_n-X_{n-1}$ is (super)martingale with respect to $\mathcal{F}_n$ and $C_n$ are bounded and positive (not necessarily uniformly) then so is $C\circ X$.
+	\begin{proof}
+		$$\mathbb{E} [(C\circ X)_n|\mathcal{F}_{n-1}] = \sum_{j=1}^n \mathbb{E} \qty[C_j(X_j-X_{j-1}) | \mathcal{F}_{n-1}] = (C\circ X)_{n-1} + C_n\mathbb{E} \qty[(X_n-X_{n-1}) | \mathcal{F}_{n-1}] $$
+	\end{proof}
+\end{prop}
+
+So what is expected winning $\mathbb{E}\qty[(C\circ X)_n]$?
+$$\mathbb{E}\qty[(C\circ X)_n] = \mathbb{E}\qty[\mathbb{E}\qty[(C\circ X)_n|\mathcal{F}_{n-1}]]  =  \mathbb{E}\qty[(C\circ X)_{n-1}] $$
+by induction $\mathbb{E}\qty[(C\circ X)_n] = \mathbb{E}\qty[(C\circ X)_0] = 0$.
+
+Similarly, if $X$ is a supermartingale and $C\geq 0$,
+$$\mathbb{E}\qty[(C\circ X)_n]\leq 0$$
+
+
+\begin{definition}
+$T: \Omega \to \mathbb{N}$ is called stopping time with respect to $\mathcal{F}_n$ if $\forall n \left\{ \omega: T(\omega) \leq n \right\} \in \mathcal{F}_n$. Equivalently is $\left\{ T=n\right\} \in \mathcal{F}_n$.
+\end{definition}

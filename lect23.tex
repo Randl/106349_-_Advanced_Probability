@@ -1,0 +1,65 @@
+$C_b^*(S)$ is dual space of signed measures and $P(S) \subset C_b^*(S)$ is a closed subspace.
+\begin{prop}
+	If $X_n\sim \mu_n$ and $X_n \to X$ a.s., then $\mu_n \to \mu$ weakly.
+	\begin{proof}
+		Let $f\in C_b(\mathbb{R})$
+		$$f(X_n) \to f(X) $$
+		a.s. and by BCT
+		$$\mathbb{E} \qty[f(X_n)] = \mathbb{E} [f(X)]$$
+	\end{proof}
+
+Also the proposition works for convergence in probability.
+\end{prop}
+
+We might guess that $F_n(x) \to F(x)$ pointwise is equivalent to weak convergence.
+
+\begin{theorem}
+	If $\mu_n \stackrel{w}{\to} \mu$ then $\forall x \: F_n(x) \to F(x) $ in continuity points of $F$.
+	
+	\begin{proof}
+		We want
+		$$\mathbb{E}_{\mu_n} \mathds{1}_{(-\infty, x) } \to \mathbb{E}_{\mu} \mathds{1}_{(-\infty, x) }$$
+		$$\forall \delta \in \mathbb{R} \: \mu_n(f_\delta) \to \mu(f_\delta)$$
+		$$\mu(f_\delta(x)) \geq \limsup \mu_n(\mathds{1}_{(-\infty, x)})$$
+		also $\mu(f_\delta ) \leq \mu_n(\mathds{1}_{(-\infty, x+\delta)}) = F(x+\delta)$
+		$$\limsup F_n(x) \leq \liminf F(x+\delta)=F(x)$$
+		we can do the same with negative $\delta$ if $F$ is continuous, and thus
+		$$\mu_n \stackrel{w}{\to} \mu$$
+	\end{proof}
+\end{theorem}
+
+\begin{definition}
+	Given $\qty(\mathcal{S}_1, \mathcal{B}_1, P_1)$ and $\qty(\mathcal{S}_2, \mathcal{B}_2, P_2)$ a measure $Q$ on $\mathbb{Q}$ is called a coupling of $P_1$, $P_2$ if letting $X_i(S_1,S_2) = S_i$ the distribution of $X_i$ under $Q$ is $P_i$.
+\end{definition}
+\begin{theorem}[Skorohod representation theorem]
+	
+	Let $\mu_n$, $n \in \mathbb{N}$ be a sequence of probability measures on a metric space $S$ such that $\mu_n$ converges weakly to some probability measure $\mu_\infty$ on $S$ as $n \to \infty$.  Suppose also that the support of $\mu_\infty$ is separable. Then there exist random variables $X_n$ defined on a common probability space $(\Omega,\mathcal{F},\mathbf{P})$ such that the law of $X_n$ is $\mu_n$ for all $n$ (including $n=\infty$) and such that $X_n$ converges to $X_\infty$, $\mathbf{P}$-almost surely.
+\end{theorem}
+
+\begin{theorem}[Helly's selection theorem]
+\end{theorem}
+
+\subsection{Characteristic function}
+
+\begin{definition}
+	Given $\mu \sim X$ then $\phi_\mu(\theta) = \int e^{i\theta x} \dd{\mu(x)} = \mathbb{E} [e^{i\theta X}]$.
+\end{definition}
+
+
+\begin{itemize}
+	\item $\phi(0)=1$
+	\item $\abs{\phi(\theta)} \leq 1$
+	\item $\phi(\theta)$ is continuous in $\theta$
+	\item $\phi_X(-\theta)  = \overline{\phi_X(\theta)}$
+	\item $\phi_{aX+b}(\theta)  = e^{i\theta b} \phi_X(a\theta)$
+\end{itemize}
+
+\begin{theorem}
+	$$\phi_{X+Y}(\theta) = \phi_X(\theta)\phi_Y(\theta)$$
+\end{theorem}
+\begin{theorem}
+	$X\sim \mu \mapsto \phi_{X}(\theta)$ is one-to-one and invertible.
+\end{theorem}
+\begin{theorem}
+$X_n \stackrel{w}{\to} X$ then $\phi_{X_n} \to \phi_X(\theta)$.
+\end{theorem}

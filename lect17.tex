@@ -1,0 +1,84 @@
+Note that $\left\{ T \geq n\right\} \in \mathcal{F}_{n-1}$, since its complementary of $\left\{ T \leq n-1\right\} $.
+\begin{definition}
+	Given a process $\left\{ X_n \right\}_n$ we say $X_n$ is adapted to $\left\{ \mathcal{F}_n \right\}_n$ if $\forall n \quad X_n\in \mathcal{F}_n$.
+\end{definition}
+\begin{definition}
+Given an adapted process $\left\{ X_n \right\}_n$ and stopping time $T$the stopped process $$ X_n^{(T)} = X_{\min\left\{ T,n \right\}} $$
+\end{definition}
+
+\begin{lemma}
+	If $X_n$ is (super-/sub-)martingale, so is $X_n^{(T)}$.
+	\begin{proof}
+		Let $C_n = \mathds{1}_{\left\{ T\geq n \right\}}$ predictable, then
+		$$\qty(C \circ X)_n = \sum_{k\leq n} C_k\qty(X_k -X_{k-1}) = \sum_{1\leq k\leq n} \mathds{1}_{T\geq k} (X_k-X_{k-1}) = X_{\min\left\{ T,n \right\}} - X_0$$
+		
+		By we already know that $\qty(C \circ X)_n$ preserve martingale property.
+	\end{proof}
+\end{lemma}
+
+\begin{theorem}
+	Let $X_n$ be a supermartingale, then $\forall n$ $\mathbb{E} \qty[X_{\min\left\{ T,n \right\}}] \leq \mathbb{E} \qty[X_0]$.
+\end{theorem}
+
+Would the property survive under $n\to \infty$? No!
+
+\paragraph{Example}
+Let $X_n$ be a SRW on $\mathbb{Z}$ starting from $0$.
+$$T_1 = \inf \left\{ n: X_n=1 \right\}$$
+
+By theorem, $\mathbb{E} \qty[X_{\min\left\{ T,n \right\}}] = 0$. On the other hand, since $P(T<\infty) = 1$, $\mathbb{E} \qty[X_T]  =1$.
+
+The problem is $T$ doesn't have expectation.
+
+\begin{theorem}[Doob's optional sampling theorem]
+	Let $T$ be a stopping time and let $X_n$ be a supermartingale. If one of the following holds
+	\begin{enumerate}
+		\item $T$ is bounded
+		\item $X$ is bounded
+		\item $\mathbb{E} < \infty $ and $\abs{X_n - X_{n-1}} \leq K$ $\forall n$ $P$ a.s. 
+	\end{enumerate}
+then $\mathbb{E} [X_T] \leq \mathbb{E}\qty[X_0]$.
+\begin{proof}
+	\begin{enumerate}
+		\item $$\mathbb{E} \qty[X_0] \geq \mathbb{E} \qty[X_{\min\left\{ T,n \right\}}]$$
+		Since
+		$$X_{\min\left\{ T,n \right\}} \to X_T$$
+		a.s. since $T$ is bounded, $\abs{X_{\min\left\{ T,n \right\}} } \leq \max \abs{X_k}$ by dominated convergence theorem, 
+		$$\mathbb{E} \qty[X_{\min\left\{ T,n \right\}}] \to \mathbb{E}\qty[X_T]$$
+		
+		
+		\item  Bounded convergence
+		
+		
+		\item $$\abs{X_{\min\left\{ T,n \right\}}} \leq K\cdot\min\left\{ T,n \right\} \leq KT$$
+			By DCT, 
+			$$\mathbb{E} \qty[X_{\min\left\{ T,n \right\}}] \to \mathbb{E}\qty[X_T]$$
+		
+	\end{enumerate}
+\end{proof}
+
+\begin{coll}
+	If $M$ is a martingale and $\abs{M_n-M_{n-1}} \leq K$ and $C$ is predictable and $\abs{C}\leq K$ and $\mathbb{E} \qty[T] <\infty$ then $\mathbb{E} \qty[C \circ X] = 0$
+\end{coll}
+
+\begin{coll}
+	If $X$ is a positive supermartingale and $T<\infty$ a.s. then
+	$$\mathbb{E}[X_T] \leq \mathbb{E} \qty[X_0]$$
+	\begin{proof}
+		Fatou lemma
+	\end{proof}
+\end{coll}
+\end{theorem}
+
+\begin{lemma}
+	Let $T$ be a stop time such that $\exists k > 0$ so that $\exists \epsilon>0$ $\forall n>0$
+	$$P\qty(T \leq n+k | \mathcal{F}_n) > \epsilon$$
+	Then $\mathbb{E} [T]<\infty$
+	\begin{proof}
+		$$\mathbb{E} \qty[T] = \sum_j P(T\geq j)$$
+		
+		Consider $J$, 
+		$$P(T\geq kJ) = \mathbb{E} \qty\bigg[\mathbb{E} \qty[\mathds{1}_{T\geq kJ}\mathds{1}_{T\geq k(J-1)}|\mathcal{F}_{k(J-1)}]] = \mathbb{E} \qty\bigg[\mathds{1}_{T\geq k(J-1)} \underbrace{\mathbb{E} \qty[\mathds{1}_{T\geq kJ}|\mathcal{F}_{k(J-1)}]}_{\leq 1-P(T\leq kJ|\mathcal{F}_{k(J-1)}) = 1-\epsilon}] \leq (1-\epsilon) P(T\geq k(J-1)) \leq (1-\epsilon)^J$$
+		Thus $P(T\geq kJ)$ decays exponentially.
+\end{proof}
+\end{lemma}

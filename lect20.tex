@@ -1,0 +1,106 @@
+\begin{theorem}[Martingale convegrence] \label{mart_conv}
+	$X$ is a supermartingale, $\sup\limits_n \mathbb{E} [X_n] <\infty$ then $\lim_{n\to\infty} X_n = X_\infty$ exists a.s. (but not neccesary in $L^1$)
+\end{theorem}
+\begin{definition}[Uniform integrability]
+	A collection $C$ is uniformly integrable if $\forall \epsilon>0$ $\exists K$ such that $\forall X\in C$ $\mathbb{E} [\abs{X} ; \abs{X}>K] <\epsilon$.
+\end{definition}
+
+Example
+$$X \in L^1 \Rightarrow C = \left\{ \mathbb{E} [X|\mathcal{J}] : \mathcal{J}\subseteq \mathcal{F} \text{ subalgebra} \right\}$$
+\begin{lemma}
+	$X\in L^1$ then $\forall \epsilon > 0$ $\exists \delta$ such that $P(F)<\delta$ then $\mathbb{E} \qty[\abs{X} ; F] < \epsilon$. 
+
+\end{lemma}
+
+\begin{theorem}
+	$X_n \substack{L^1}{\to} X \iff$
+	\begin{enumerate}
+		\item $\forall \epsilon>0$ $P(\abs{X}_n-X >\epsilon) \to 0$
+		\item $\left\{  X_n \right\}, X$ are uniformly integrable.
+	\end{enumerate}
+
+\begin{proof}
+	
+	$\Rightarrow$:
+	
+	From Markov we get
+	$$\epsilon P(\abs{X_n-X}<\epsilon) \leq \mathbb{E} \qty[\abs{X_n-X}]$$
+
+	Now we want to show uniform integrability:
+	$$\mathbb{E} \qty[\abs{X_n -X+X }; \abs{X}_n> K] \leq \mathbb{E} \qty[\abs{X_n -X}; \abs{X_n}>K]   +\mathbb{E} \qty[\abs{X}; \abs{X_n}> K]  \leq \epsilon +  \mathbb{E} \qty[\abs{X}; \abs{X_n}> K] $$
+	
+	Choose $K(\delta)$ such that $\sup\limits_n \mathbb{E} \abs{X_n} < \delta(\epsilon)$ use lemma for $X$ to say $\mathbb{E} \qty[\abs{X} ; \abs{X_n}>K]<\epsilon$
+	
+	Says $\forall \epsilon>0$ $\exists n(\epsilon), K(\epsilon) $ such that $\mathbb{E} \qty[\abs{X_n} ; \abs{X_n}>K] <\epsilon$.
+	$\Leftarrow$:
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+	Let $M_n$ be u.i. martingale. Then $\lim_{n\to\infty} M_n = M_\infty$ a.s. and in $L_1$.
+	\begin{proof}
+		A.s. convergence follows from \ref{mart_conv}. Since convergence in probability follows from a.s. convergence, we get $L_1$ convergence.
+	\end{proof}
+\end{theorem}
+
+\begin{theorem}[Levy's upwards theorem]
+	Let $\mathcal{F}_n$ filtration $\eta \in L^1$ and $\mathcal{F}_\infty = \sigma(\bigcup_n \mathcal{F}_n)$.
+	
+	$M_n = \mathbb{E} \qty[\eta | \mathcal{F}_n]$ is a u.i. martingale and 
+	$M_n \to M_\infty$ a.s. and $L^1$ and moreover, $M_\infty = \mathbb{E} \qty[\eta|\mathcal{F}_\infty ]$
+	
+	\begin{proof}
+		If $F\in \mathcal{F}_n$ $\forall r>n$:
+		$$\mathbb{E} \qty[M_r ; F ] = \mathbb{E} \qty[ \mathbb{E} \qty[M_r |\mathcal{F}_n] ; F] = \mathbb{E} \qty[M_n; F]$$
+		
+		Thus $$\mathbb{E} [M_\infty ; F] = \mathbb{E} [M_n; F] = \mathbb{E} [\mathbb{E} \qty[\eta | \mathcal{F}_\infty]; F] $$
+		
+		So 
+		$$F\mapsto \mathbb{E} [M_\infty ; F]$$
+		$$ F\mapsto\mathbb{E} [\mathbb{E} \qty[\eta | \mathcal{F}_\infty]; F]$$
+		agree on $\bigcup \mathcal{F})n$ by $\pi$-$\lambda$ they agree on $\mathcal{F}_\infty$,
+	\end{proof}
+\end{theorem}
+
+\begin{definition}[Backward filtration]
+	$\mathcal{F}_n$ is a backward filtration if $\mathcal{F}_n \supset \mathcal{F}_{n+1}$
+\end{definition}
+\begin{definition}[Backward martingale]
+$$\mathbb{E} \qty[M_n | \mathcal{F}_{n+1}] = M_{n+1}$$
+\end{definition}
+
+\begin{theorem}[Levy's downwards theorem]
+	Let $\mathcal{F}_n$ backward filtration $\eta \in L^1$ and $\mathcal{F}_\infty = \bigcap_n \mathcal{F}_n$
+	$M_n = \mathbb{E} \qty[\eta | \mathcal{F}_n]$ is a u.i. martingale and 
+	$M_n \to M_\infty$ a.s. and $L^1$ and moreover, $M_\infty = \mathbb{E} \qty[\eta|\mathcal{F}_\infty ]$
+	
+	\begin{proof}
+		Recheck upcrossing inequality works for backward martingale.
+	\end{proof}
+\end{theorem}
+
+\begin{theorem}[Kolmogorov's zero-one law]
+	Let $\left\{X_i\right\}$ independent and $\mathcal{T} = \bigcap_n \sigma(X_n,\dots)$ 
+	$$\forall F\in \mathcal{T} \quad P(F) \in \left\{0,1\right\}$$
+	\begin{proof}
+		Let $\mathcal{F}_n = \sigma(X_1, \dots, X_n)$ and $\eta = 1_F$ for $F\in \mathcal{T}$.
+		$$P(F) = \mathbb{E} \qty[\eta | \mathcal{F}_n]$$
+		From Levy upward $$\lim_{n\to\infty}  \mathbb{E} \qty[\eta | \mathcal{F}_n] = \mathbb{E} \qty[\eta | \mathcal{F}_\infty]= \eta = \mathbb{1}_F$$
+		i.e. it's either $0$ or $1$.
+	\end{proof}
+\end{theorem}
+
+
+\begin{theorem}[Strong law of large numbers]
+	$X_i$ i.i.d. with $\mathbb{E} [\abs{X_n}] <\infty$.
+	$$\frac{S_n}{n} \to \mathbb{E} \qty[X_1]$$
+		\begin{proof}	
+	Let $\mathcal{F}_n = \sigma(S_n, S_{n+1}, \dots)$.
+	$$\frac{S_n}{n} = \mathbb{E} \qty[\frac{S_n}{n} | \mathcal{F}_n] = \frac{\sum \mathbb{E} \qty[X_i |\mathcal{F}_n] }{n} =  \mathbb{E} \qty[X_1 | \mathcal{F}_n]$$
+	We've shown that $\mathbb{E} \qty[X_1 | \mathcal{F}_n] = \frac{S_n}{n}$. Therefore by Levy downward
+	$$\frac{S_n}{n} \stackrel{\text{a.s.}, L^1}{\to} A_\infty =  \mathbb{E} \qty[X_1 | \mathcal{F}_\infty]$$
+	
+	Since both $\limsup \frac{S_n}{n} \in \mathcal{T}$, $\liminf \frac{S_n}{n} \in \mathcal{T}$ we get $\mathbb{E} \qty[X|\mathcal{F}_\infty] \in \mathcal{T}$. By Kolmogorov 0-1 $\mathbb{E} \qty[X|\mathcal{F}_\infty]$ is constant a.s. and thus equals $\mathbb{E} [X_1]$.
+	
+\end{proof}
+\end{theorem}
